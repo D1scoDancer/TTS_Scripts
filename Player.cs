@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     float movementSpeed = 0; // скорость движения по x
     [SerializeField]
     float groundRadius;
-    [Range(1,10)]
+    [SerializeField]
     float jumpForce;
 
     bool facingRight;
