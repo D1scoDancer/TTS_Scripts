@@ -59,7 +59,6 @@ public class Player : MonoBehaviour
         HandleMovement(horizontal);
         Flip(horizontal);
         HandleAttacks();
-        HandleLayers();
         ResetValues();
     }
 
@@ -69,10 +68,6 @@ public class Player : MonoBehaviour
     /// <param name="horizontal"></param>
     void HandleMovement(float horizontal)
     {
-        if(myRigidbody2D.velocity.y < 0)
-        {
-            myAnimator.SetBool("land", true);
-        }
         if(!myAnimator.GetBool("slide") && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("attack") && (isGrounded || airControl)) //нельзя двигаться пока идет атака
         {
             myRigidbody2D.velocity = new Vector2(horizontal * movementSpeed, myRigidbody2D.velocity.y);
@@ -81,7 +76,6 @@ public class Player : MonoBehaviour
         {
             isGrounded = false;
             myRigidbody2D.AddForce(new Vector2(0, jumpForce));
-            myAnimator.SetTrigger("jump");
         }
         if(slide && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Slide"))
         {
@@ -159,26 +153,12 @@ public class Player : MonoBehaviour
                 {
                     if(collider.gameObject != gameObject)
                     {
-                        myAnimator.ResetTrigger("jump");
-                        myAnimator.SetBool("land", false);
                         return true;
                     }
                 }
             }
         }
         return false;
-    }
-
-    void HandleLayers()
-    {
-        if(!isGrounded)
-        {
-            myAnimator.SetLayerWeight(1, 1);
-        }
-        else
-        {
-            myAnimator.SetLayerWeight(1, 0);
-        }
     }
 
     /// <summary>
