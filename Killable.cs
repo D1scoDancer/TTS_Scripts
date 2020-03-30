@@ -4,15 +4,33 @@ using UnityEngine;
 
 public class Killable : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    int health;
+
+
+    
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        
+        if(health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        //if has tag damagable health--
+    }
+
+    void Die()
+    {
+        //play DeathAnimation
+        Destroy(this);
     }
 }
