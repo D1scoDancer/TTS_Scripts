@@ -190,4 +190,9 @@ public class Player : MonoBehaviour
         attack = false;
         slide = false;
     }
+
+    public float GetXPosition()
+    {
+        return myRigidbody2D.position.x;
+    }
 }
