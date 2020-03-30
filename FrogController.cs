@@ -1,56 +1,57 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Timers;
+using System;
 
 public class FrogController : MonoBehaviour
 {
-    [SerializeField]
-    Player player;
-
-    Rigidbody2D rigidbody;
+    Animator myAnimator;
 
     [SerializeField]
     float speed;
 
     [SerializeField]
-    float jumpForce;
+    float sittingDuration;
 
-    [SerializeField]
-    float rangeOfWalking;
+    bool movingRight;
+    bool moving;
 
-    // Start is called before the first frame update
+    DateTime freezeTime;
+
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
+        moving = myAnimator.GetBool("moving");
     }
 
-    // Update is called once per frame
-
-    void FixedUpdate()
+    void Update()
     {
-        if(Mathf.Abs(rigidbody.position.x - player.GetXPosition()) <= 300)
+        if(movingRight && moving)
         {
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
+            transform.Translate(Time.deltaTime * speed, speed * Time.deltaTime, 0);
+            transform.localScale = new Vector3(-20, 20, 0);
         }
-
+        else if(moving)
+        {
+            transform.Translate(-Time.deltaTime * speed, speed * Time.deltaTime, 0);
+            transform.localScale = new Vector3(20, 20, 0);
+        }
+        else if(Math.Abs(freezeTime.Second - DateTime.Now.Second) >= sittingDuration)
+        {
+            moving = true;
+            myAnimator.SetBool("moving", moving);
+        }
     }
 
-    void Move()
+    void OnTriggerEnter2D(Collider2D collision)
     {
-
-
-    }
-
-
-
-
-
-
-    void Flip()
-    {
-        Vector2 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
+        if(collision.gameObject.CompareTag("Turn"))
+        {
+            movingRight = !movingRight;
+        }
+        moving = false;
+        myAnimator.SetBool("moving", moving);
+        freezeTime = DateTime.Now;
     }
 }
