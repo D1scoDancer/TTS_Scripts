@@ -6,16 +6,18 @@ public class MovingPlatform : MonoBehaviour
 {
 
     [SerializeField]
-    float speed;
+    private float speed;
     
-    void Start()
+    private void Start()
     {
         
     }
 
     
-    void Update()
+    private void Update()
     {
-        transform.Translate(Time.deltaTime * speed, Time.deltaTime * speed, 0);
+        transform.Translate(Time.deltaTime * speed, -Time.deltaTime * speed, 0);
     }
+
+    
 }

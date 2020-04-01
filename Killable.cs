@@ -5,17 +5,17 @@ using UnityEngine;
 public class Killable : MonoBehaviour
 {
     [SerializeField]
-    int health;
+    private int health;
 
 
-    
-    void Start()
+
+    private void Start()
     {
         
     }
 
-    
-    void Update()
+
+    private void Update()
     {
         if(health <= 0)
         {
@@ -23,12 +23,12 @@ public class Killable : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         //if has tag damagable health--
     }
 
-    void Die()
+    private void Die()
     {
         //play DeathAnimation
         Destroy(this);

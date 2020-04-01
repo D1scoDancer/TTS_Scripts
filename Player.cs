@@ -4,36 +4,36 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    Rigidbody2D myRigidbody2D;
-    Animator myAnimator;
-    BoxCollider2D myBoxCollider2D;
+    private Rigidbody2D myRigidbody2D;
+    private Animator myAnimator;
+    private BoxCollider2D myBoxCollider2D;
 
     [SerializeField]
-    LayerMask whatIsGround;
+    private LayerMask whatIsGround;
 
     [SerializeField]
-    Transform[] groundPoints;
+    private Transform[] groundPoints;
 
     [SerializeField]
-    float movementSpeed = 0; // скорость движения по x
+    private float movementSpeed = 0; // скорость движения по x
     [SerializeField]
-    float groundRadius;
+    private float groundRadius;
     [SerializeField]
-    float jumpForce;
+    private float jumpForce;
 
-    bool facingRight;
-    bool attack;
-    bool isGrounded;
-    bool jump;
+    private bool facingRight;
+    private bool attack;
+    private bool isGrounded;
+    private bool jump;
     [SerializeField]
-    bool airControl;
+    private bool airControl;
 
 
 
     /// <summary>
     /// Начинает работу в начале сцены
     /// </summary>
-    void Start()
+    private void Start()
     {
         facingRight = true;
         myRigidbody2D = GetComponent<Rigidbody2D>();
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Обновляется каждый кадр
     /// </summary>
-    void Update()
+    private void Update()
     {
         HandleInput();
     }
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Обновляется каждую единицу времени
     /// </summary>
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         float horizontal = Input.GetAxis("Horizontal");
         isGrounded = IsGrounded();
@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
     /// Движение
     /// </summary>
     /// <param name="horizontal"></param>
-    void HandleMovement(float horizontal)
+    private void HandleMovement(float horizontal)
     {
         if(myRigidbody2D.velocity.y < 0)
         {
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Атаки
     /// </summary>
-    void HandleAttacks()
+    private void HandleAttacks()
     {
         if(attack && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("attack"))
         {
@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Ввод
     /// </summary>
-    void HandleInput()
+    private void HandleInput()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -110,14 +110,14 @@ public class Player : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             attack = true;
-        }  
+        }
     }
 
     /// <summary>
     /// Поворот персонажа
     /// </summary>
     /// <param name="horizontal"></param>
-    void Flip(float horizontal)
+    private void Flip(float horizontal)
     {
         if(horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
         {
@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
     /// Сталкивются ли точки с чем то кроме персонажа
     /// </summary>
     /// <returns></returns>
-    bool IsGrounded()
+    private bool IsGrounded()
     {
         if(myRigidbody2D.velocity.y <= 0)
         {
@@ -156,7 +156,7 @@ public class Player : MonoBehaviour
         return false;
     }
 
-    void HandleLayers()
+    private void HandleLayers()
     {
         if(!isGrounded)
         {
@@ -171,10 +171,26 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Сброс значений
     /// </summary>
-    void ResetValues()
+    private void ResetValues()
     {
         jump = false;
         attack = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.name.Equals("MovingPlatform"))
+        {
+            this.transform.parent = collision.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.gameObject.name.Equals("MovingPlatform"))
+        {
+            this.transform.parent = null;
+        }
     }
 
     public float GetXPosition()

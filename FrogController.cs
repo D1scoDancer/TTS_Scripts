@@ -3,26 +3,26 @@ using UnityEngine;
 
 public class FrogController : MonoBehaviour
 {
-    Animator myAnimator;
+    private Animator myAnimator;
 
     [SerializeField]
-    float speed;
+    private float speed;
 
     [SerializeField]
-    float sittingDuration;
+    private float sittingDuration;
 
-    bool movingRight;
-    bool moving;
+    private bool movingRight;
+    private bool moving;
 
-    DateTime freezeTime;
+    private DateTime freezeTime;
 
-    void Start()
+    private void Start()
     {
         myAnimator = GetComponent<Animator>();
         moving = myAnimator.GetBool("moving");
     }
 
-    void Update()
+    private void Update()
     {
         if(movingRight && moving)
         {
@@ -41,7 +41,7 @@ public class FrogController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Turn"))
         {
