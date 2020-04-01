@@ -23,7 +23,6 @@ public class Player : MonoBehaviour
 
     bool facingRight;
     bool attack;
-    bool slide;
     bool isGrounded;
     bool jump;
     [SerializeField]
@@ -73,7 +72,7 @@ public class Player : MonoBehaviour
         {
             myAnimator.SetBool("land", true);
         }
-        if(!myAnimator.GetBool("slide") && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("attack") && (isGrounded || airControl)) //нельзя двигаться пока идет атака
+        if(!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("attack") && (isGrounded || airControl)) //нельзя двигаться пока идет атака
         {
             myRigidbody2D.velocity = new Vector2(horizontal * movementSpeed, myRigidbody2D.velocity.y);
         }
@@ -82,14 +81,6 @@ public class Player : MonoBehaviour
             isGrounded = false;
             myRigidbody2D.AddForce(new Vector2(0, jumpForce));
             myAnimator.SetTrigger("jump");
-        }
-        if(slide && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Slide"))
-        {
-            myAnimator.SetBool("slide", true);
-        }
-        else if(!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Slide"))
-        {
-            myAnimator.SetBool("slide", false);
         }
         myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }
@@ -116,14 +107,10 @@ public class Player : MonoBehaviour
         {
             jump = true;
         }
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        if(Input.GetMouseButtonDown(0))
         {
             attack = true;
-        }
-        if(Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            slide = true;
-        }
+        }  
     }
 
     /// <summary>
@@ -188,7 +175,6 @@ public class Player : MonoBehaviour
     {
         jump = false;
         attack = false;
-        slide = false;
     }
 
     public float GetXPosition()
