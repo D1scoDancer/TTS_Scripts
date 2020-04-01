@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private Transform[] groundPoints;
 
     [SerializeField]
-    private float movementSpeed = 0; // скорость движения по x
+    private float speed = 0; // скорость движения по x
     [SerializeField]
     private float groundRadius;
     [SerializeField]
@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
         }
         if(!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("attack") && (isGrounded || airControl)) //нельзя двигаться пока идет атака
         {
-            myRigidbody2D.velocity = new Vector2(horizontal * movementSpeed, myRigidbody2D.velocity.y);
+            myRigidbody2D.velocity = new Vector2(horizontal * speed, myRigidbody2D.velocity.y);
         }
         if(isGrounded && jump)
         {
