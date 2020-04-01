@@ -17,13 +17,6 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField]
     private int yDirection;
 
-
-
-    private void Start()
-    {
-
-    }
-
     private void Update()
     {
         if(movingRight)
