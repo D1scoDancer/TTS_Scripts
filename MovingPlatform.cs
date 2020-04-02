@@ -9,6 +9,9 @@ public class MovingPlatform : MonoBehaviour
     private float speed;
 
     [SerializeField]
+    private bool activatedByPlayer;
+
+    [SerializeField]
     private bool movingRight;
 
     [SerializeField]
@@ -18,6 +21,22 @@ public class MovingPlatform : MonoBehaviour
     private int yDirection;
 
     private void Update()
+    {
+        if(activatedByPlayer)
+        {
+            if(transform.Find("Player") != null)
+            {
+                Move();
+                activatedByPlayer = false;
+            }
+        }
+        else
+        {
+            Move();
+        }
+    }
+
+    private void Move()
     {
         if(movingRight)
         {
@@ -29,7 +48,6 @@ public class MovingPlatform : MonoBehaviour
             transform.Translate(-Time.deltaTime * speed * xDirection,
                 -Time.deltaTime * speed * yDirection, 0);
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
