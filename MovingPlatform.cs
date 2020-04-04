@@ -15,10 +15,10 @@ public class MovingPlatform : MonoBehaviour
     private bool movingRight;
 
     [SerializeField]
-    private int xDirection;
+    private float xDirection;
 
     [SerializeField]
-    private int yDirection;
+    private float yDirection;
 
     private void Update()
     {
