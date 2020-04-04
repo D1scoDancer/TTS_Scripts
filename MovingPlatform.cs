@@ -20,20 +20,26 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField]
     private float yDirection;
 
+    private bool stop;
+
     private void Update()
     {
-        if(activatedByPlayer)
+        if(!stop)
         {
-            if(transform.Find("Player") != null)
+            if(activatedByPlayer)
+            {
+                if(transform.Find("Player") != null)
+                {
+                    Move();
+                    activatedByPlayer = false;
+                }
+            }
+            else
             {
                 Move();
-                activatedByPlayer = false;
             }
         }
-        else
-        {
-            Move();
-        }
+       
     }
 
     private void Move()
@@ -55,6 +61,10 @@ public class MovingPlatform : MonoBehaviour
         if(collision.gameObject.CompareTag("Turn"))
         {
             movingRight = !movingRight;
+        }
+        if(collision.gameObject.CompareTag("Stop"))
+        {
+            stop = true;
         }
     }
 }
