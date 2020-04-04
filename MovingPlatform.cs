@@ -64,7 +64,16 @@ public class MovingPlatform : MonoBehaviour
         }
         if(collision.gameObject.CompareTag("Stop"))
         {
+            stop = true;   
+        }
+        if(collision.gameObject.CompareTag("Rotate"))
+        {
             stop = true;
+            if(transform.Find("Player"))
+            {
+                transform.Find("Player").parent = null;
+            }
+            transform.Rotate(0, 0, -90);
         }
     }
 }
