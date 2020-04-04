@@ -179,7 +179,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.name.Equals("MovingPlatform"))
+        if(collision.gameObject.name.Contains("MovingPlatform"))
         {
             this.transform.parent = collision.transform;
         }
@@ -187,7 +187,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if(collision.gameObject.name.Equals("MovingPlatform"))
+        if(collision.gameObject.name.Contains("MovingPlatform"))
         {
             this.transform.parent = null;
         }
