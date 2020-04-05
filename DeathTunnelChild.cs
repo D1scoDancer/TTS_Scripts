@@ -8,14 +8,9 @@ public class DeathTunnelChild : MonoBehaviour
     {
         Debug.Log(1);
         if(collision.gameObject.name == "LongPlatformDown")
+        {
             transform.parent.GetComponent<DeathTunnel>().trap = false;
+        }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log(2);
-    }
-
-   
 }
 
