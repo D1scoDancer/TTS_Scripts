@@ -64,7 +64,7 @@ public class WaterWheelPlatform : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("WheelCommand"))
+        if(collision.CompareTag("WheelCommand") && collision.transform.parent == transform.parent)
         {
             if(movingRight)
             {
