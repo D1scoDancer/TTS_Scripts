@@ -123,9 +123,7 @@ public class Player : MonoBehaviour
         {
             facingRight = !facingRight;
 
-            Vector2 theScale = transform.localScale;
-            theScale.x *= -1;
-            transform.localScale = theScale;
+            transform.Rotate(0, 180, 0);
         }
     }
 
