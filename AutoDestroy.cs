@@ -1,18 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
 
 public class AutoDestroy : MonoBehaviour
 {
-    public double life = 1f;
-    void  Start()
+    DateTime t;
+
+    public float timing = 1;
+
+    void Start()
     {
-        life = Time.time + 1.0;
+        t = DateTime.Now;
     }
 
     void Update()
     {
-        if(life <= Time.time)
+        if((DateTime.Now - t).TotalSeconds >= timing)
         {
             Destroy(gameObject);
         }
