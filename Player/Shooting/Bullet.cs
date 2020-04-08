@@ -7,6 +7,11 @@ public class Bullet : MonoBehaviour
     public float speed = 20f;
     public int damage = 5;
     public GameObject impactEffect;
+    public GameObject player;
+
+    private List<string> tagsToIgnore = new List<string>() {"Player", "Turn",
+        "Stop", "Rotate","WheelCommand" };
+
     void Start()
     {
         GetComponent<Rigidbody2D>().velocity = transform.right * speed;
@@ -14,11 +19,16 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.name != "Player")
+        foreach(string tag in tagsToIgnore)
         {
-            Enemy enemy = collision.GetComponent<Enemy>();
-            enemy?.TakeDamage(damage);
+            if(collision.gameObject.CompareTag(tag))
+            {
+                Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+            }
         }
+        Enemy enemy = collision.GetComponent<Enemy>();
+        enemy?.TakeDamage(damage);
+
         Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(gameObject);
 
