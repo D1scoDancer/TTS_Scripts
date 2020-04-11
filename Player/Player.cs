@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
         {
             myAnimator.SetBool("land", true);
         }
-        if(!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("attack") && (isGrounded || airControl)) //нельзя двигаться пока идет атака
+        if(isGrounded || airControl)
         {
             myRigidbody2D.velocity = new Vector2(horizontal * speed, myRigidbody2D.velocity.y);
         }
@@ -90,10 +90,9 @@ public class Player : MonoBehaviour
     /// </summary>
     private void HandleAttacks()
     {
-        if(attack && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("attack"))
+        if(attack)
         {
-            myAnimator.SetTrigger("attack");
-            myRigidbody2D.velocity = Vector2.zero;
+            myAnimator.SetTrigger("attack");  
         }
     }
 
