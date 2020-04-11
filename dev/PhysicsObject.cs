@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PhysicsObject : MonoBehaviour
 {
-    public float midGroundNormalY = .65f;
+    public float minGroundNormalY = .65f;
     public float gravityModifier = 1f;
+
+    protected bool grounded;
+    protected Vector2 groundNormal;
 
     protected Rigidbody2D rb2D;
     protected Vector2 velocity;
@@ -40,15 +43,17 @@ public class PhysicsObject : MonoBehaviour
     {
         velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
 
+        grounded = false;
+
         Vector2 deltaPosition = velocity * Time.deltaTime;
 
         Vector2 move = Vector2.up * deltaPosition.y;
 
-        Movement(move);
+        Movement(move, true);
 
     }
 
-    void Movement(Vector2 move)
+    void Movement(Vector2 move, bool yMovement)
     {
         float distance = move.magnitude;
 
@@ -67,11 +72,27 @@ public class PhysicsObject : MonoBehaviour
             {
                 Vector2 currentNormal = hitBufferList[i].normal;
 
+                if(currentNormal.y > minGroundNormalY)
+                {
+                    grounded = true;
+                    if(yMovement)
+                    {
+                        groundNormal = currentNormal;
+                        currentNormal.x = 0;
+                    }
+                }
+
+                float projection = Vector2.Dot(velocity, currentNormal);
+                if(projection < 0)
+                {
+                    velocity = velocity - projection * currentNormal;
+                }
+
+                float modifiedDistance = hitBufferList[i].distance - shellRadius;
+                distance = modifiedDistance < distance ? modifiedDistance : distance;
             }
-
-
         }
 
-        rb2D.position += move;
+        rb2D.position += move.normalized * distance;
     }
 }
