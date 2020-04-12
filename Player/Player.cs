@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D myRigidbody2D;
     private Animator myAnimator;
+    private BoxCollider2D myBoxCollider2D;
 
     [SerializeField]
     private LayerMask whatIsGround;
