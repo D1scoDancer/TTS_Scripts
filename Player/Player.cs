@@ -72,11 +72,11 @@ public class Player : MonoBehaviour
         {
             myAnimator.SetBool("land", true);
         }
-        if(isGrounded || (airControl && jump))
+        if(isGrounded || (airControl)) //движение в воздухе, да и просто
         {
             myRigidbody2D.velocity = new Vector2(horizontal * speed, myRigidbody2D.velocity.y);
         }
-        if(isGrounded && jump)
+        if(isGrounded && jump)  // прыжок
         {
             isGrounded = false;
             myRigidbody2D.AddForce(new Vector2(0, jumpForce));
