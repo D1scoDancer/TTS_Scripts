@@ -1,6 +1,4 @@
 ﻿using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -22,8 +20,15 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float jumpForce;
 
+    // настройки камеры
+    private float cmYStandart;
+    [SerializeField]
+    private float cmYDown;
+    [SerializeField]
+    private float cmSpeed;
+
+
     private bool facingRight;
-    private bool attack;
     private bool isGrounded;
     private bool jump;
     private bool cameraDown;
@@ -36,6 +41,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        cmYStandart = cameraCM.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenY;
         facingRight = true;
         myRigidbody2D = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
@@ -95,10 +101,6 @@ public class Player : MonoBehaviour
         {
             jump = true;
         }
-        if(Input.GetMouseButtonDown(0))
-        {
-            attack = true;
-        }
         if(Input.GetKey(KeyCode.S))
         {
             cameraDown = true;
@@ -116,11 +118,17 @@ public class Player : MonoBehaviour
         var body = setting.GetCinemachineComponent<CinemachineFramingTransposer>();
         if(cameraDown)
         {
-            body.m_ScreenY = -0.25f;
+            if(body.m_ScreenY > cmYDown)
+            {
+                body.m_ScreenY -= cmSpeed * 0.05f;
+            }
         }
         else
         {
-            body.m_ScreenY = 0.5f;
+            if(body.m_ScreenY < cmYStandart)
+            {
+                body.m_ScreenY += cmSpeed * 0.05f;
+            }
         }
     }
 
@@ -183,7 +191,6 @@ public class Player : MonoBehaviour
     private void ResetValues()
     {
         jump = false;
-        attack = false;
         cameraDown = false;
     }
 
