@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
         {
             myAnimator.SetBool("land", true);
         }
-        if(isGrounded || airControl)
+        if(isGrounded || (airControl && jump))
         {
             myRigidbody2D.velocity = new Vector2(horizontal * speed, myRigidbody2D.velocity.y);
         }
