@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void HandleInput()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKey(KeyCode.Space))
         {
             jump = true;
         }
