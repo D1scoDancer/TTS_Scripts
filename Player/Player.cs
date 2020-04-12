@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D myRigidbody2D;
     private Animator myAnimator;
-    private BoxCollider2D myBoxCollider2D;
+    public Transform cameraCM;
 
     [SerializeField]
     private LayerMask whatIsGround;
@@ -25,9 +26,9 @@ public class Player : MonoBehaviour
     private bool attack;
     private bool isGrounded;
     private bool jump;
+    private bool cameraDown;
     [SerializeField]
     private bool airControl;
-
 
 
     /// <summary>
@@ -56,8 +57,8 @@ public class Player : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         isGrounded = IsGrounded();
         HandleMovement(horizontal);
+        HandleCamera();
         Flip(horizontal);
-        HandleAttacks();
         HandleLayers();
         ResetValues();
     }
@@ -86,18 +87,6 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// Атаки
-    /// </summary>
-    private void HandleAttacks()
-    {
-        if(attack)
-        {
-            myAnimator.SetTrigger("attack");  
-        }
-    }
-
-
-    /// <summary>
     /// Ввод
     /// </summary>
     private void HandleInput()
@@ -109,6 +98,29 @@ public class Player : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             attack = true;
+        }
+        if(Input.GetKey(KeyCode.S))
+        {
+            cameraDown = true;
+        }
+        else
+        {
+            cameraDown = false;
+        }
+        Debug.Log(cameraDown);
+    }
+
+    private void HandleCamera()
+    {
+        var setting = cameraCM.GetComponent<CinemachineVirtualCamera>();
+        var body = setting.GetCinemachineComponent<CinemachineFramingTransposer>();
+        if(cameraDown)
+        {
+            body.m_ScreenY = -0.25f;
+        }
+        else
+        {
+            body.m_ScreenY = 0.5f;
         }
     }
 
@@ -172,6 +184,7 @@ public class Player : MonoBehaviour
     {
         jump = false;
         attack = false;
+        cameraDown = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
