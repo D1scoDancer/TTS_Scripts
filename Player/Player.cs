@@ -24,6 +24,10 @@ public class Player : MonoBehaviour
     private bool attack;
     private bool isGrounded;
     private bool jump;
+    [SerializeField]
+    private bool airControl;
+
+
 
     /// <summary>
     /// Начинает работу в начале сцены
@@ -63,20 +67,20 @@ public class Player : MonoBehaviour
     /// <param name="horizontal"></param>
     private void HandleMovement(float horizontal)
     {
+        if(myRigidbody2D.velocity.y < 0)
+        {
+            myAnimator.SetBool("land", true);
+        }
+        if(isGrounded || airControl)
+        {
+            myRigidbody2D.velocity = new Vector2(horizontal * speed, myRigidbody2D.velocity.y);
+        }
         if(isGrounded && jump)
         {
             isGrounded = false;
             myRigidbody2D.AddForce(new Vector2(0, jumpForce));
             myAnimator.SetTrigger("jump");
         }
-        if(myRigidbody2D.velocity.y < 0)
-        {
-            myAnimator.SetBool("land", true);
-        }
-        if(isGrounded)
-        {
-            myRigidbody2D.velocity = new Vector2(horizontal * speed, myRigidbody2D.velocity.y);
-        }    
         myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }
 
