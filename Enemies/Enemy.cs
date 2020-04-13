@@ -1,21 +1,21 @@
 ﻿using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IKillable
 {
-    public int health;
+    public int Health { get; set; }
 
     public GameObject deathEffect;
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        if(health <= 0)
+        Health -= damage;
+        if(Health <= 0)
         {
             Die();
         }
     }
 
-    void Die()
+    public void Die()
     {
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
