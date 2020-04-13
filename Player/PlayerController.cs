@@ -109,7 +109,6 @@ public class PlayerController : MonoBehaviour
         {
             cameraDown = false;
         }
-        Debug.Log(cameraDown);
     }
 
     private void HandleCamera()
@@ -151,7 +150,7 @@ public class PlayerController : MonoBehaviour
     /// Сталкивются ли точки с чем то кроме персонажа
     /// </summary>
     /// <returns></returns>
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         if(myRigidbody2D.velocity.y <= 0)
         {

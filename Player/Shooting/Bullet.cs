@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour, IDamagable
 {
     public float speed = 20f;
-    public int damage = 5;
+    public int Damage { get; set; }
     public GameObject impactEffect;
     public GameObject player;
 
@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
             }
         }
         Enemy enemy = collision.GetComponent<Enemy>();
-        enemy?.TakeDamage(damage);
+        enemy?.TakeDamage(Damage);
 
         Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(gameObject);

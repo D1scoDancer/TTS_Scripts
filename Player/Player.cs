@@ -6,7 +6,7 @@ public class Player : MonoBehaviour, IKillable
 {
     public GameObject deathEffect;
 
-    public int Health { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public int Health { get; set; }
 
     public void Die()
     {
@@ -18,6 +18,14 @@ public class Player : MonoBehaviour, IKillable
     {
         Health -= damage;
         if(Health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.layer == 4)
         {
             Die();
         }
