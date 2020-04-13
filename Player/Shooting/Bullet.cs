@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     public GameObject player;
 
     private List<string> tagsToIgnore = new List<string>() {"Player", "Turn",
-        "Stop", "Rotate","WheelCommand" };
+        "Stop", "Rotate","WheelCommand", "JustIgnore" };
 
     void Start()
     {
