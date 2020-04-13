@@ -1,7 +1,7 @@
 ﻿using Cinemachine;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D myRigidbody2D;
     private Animator myAnimator;
