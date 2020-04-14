@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour, IKillable
 {
@@ -20,6 +18,10 @@ public class Player : MonoBehaviour, IKillable
         if(Health <= 0)
         {
             Die();
+        }
+        else
+        {
+            //покраснеть
         }
     }
 

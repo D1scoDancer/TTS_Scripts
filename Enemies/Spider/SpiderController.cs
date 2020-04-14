@@ -1,18 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Смена анимаций в SpiderController
+/// </summary>
 public class SpiderController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Rigidbody2D spiderRigidbody2D;
+    private Animator spiderAnimator;
+
+    private bool attack;
+    private bool shoot;
+
+    private void Start()
     {
-        
+        spiderRigidbody2D = GetComponent<Rigidbody2D>();
+        spiderAnimator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+
+    }
+
+    private void HandleAnimations()
+    {
+
+    }
+
+    private void ResetValues()
+    {
+        // не знаю понадобится ли
     }
 }

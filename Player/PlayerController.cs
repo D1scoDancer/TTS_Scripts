@@ -26,12 +26,11 @@ public class PlayerController : MonoBehaviour
     private float cmYDown;
     [SerializeField]
     private float cmSpeed;
-
+    private bool cameraDown;
 
     private bool facingRight;
     private bool isGrounded;
     private bool jump;
-    private bool cameraDown;
     [SerializeField]
     private bool airControl;
 
