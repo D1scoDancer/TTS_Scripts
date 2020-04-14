@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface IDamagable
 {
-    int Damage { get; set; }
+    int CollideDamage { get; set; }
+
+    void onCollisionrEnter2D(Collision2D collision);
 }
