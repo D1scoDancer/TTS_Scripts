@@ -1,11 +1,19 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Player : MonoBehaviour, IKillable
 {
     public GameObject deathEffect;
 
-    public int Health { get; set; }
+    public int health;
+    SpriteRenderer spr;
+    Color def;
 
+    private void Start()
+    {
+        spr = gameObject.GetComponent<SpriteRenderer>();
+        def = spr.color;
+    }
     public void Die()
     {
         Instantiate(deathEffect, transform.position, Quaternion.identity);
@@ -14,14 +22,18 @@ public class Player : MonoBehaviour, IKillable
 
     public void TakeDamage(int damage)
     {
-        Health -= damage;
-        if(Health <= 0)
+        Debug.Log("HIT");
+        health -= damage;
+        if(health <= 0)
         {
             Die();
         }
         else
         {
-            //покраснеть
+            spr.color = new Color(247, 47, 47);
+            Debug.Log("before");
+            Invoke("ReturnColor", 2);
+           
         }
     }
 
@@ -32,4 +44,11 @@ public class Player : MonoBehaviour, IKillable
             Die();
         }
     }
+
+    private void ReturnColor()
+    {
+        spr.color = def;
+        Debug.Log("after");
+    }
+
 }

@@ -2,17 +2,21 @@
 
 public class Enemy : MonoBehaviour, IKillable
 {
-    public int Health { get; set; }
+    [SerializeField]
+    private int health;
 
     public GameObject deathEffect;
 
+
+
     public void TakeDamage(int damage)
     {
-        Health -= damage;
-        if(Health <= 0)
+        health -= damage;
+        if(health <= 0)
         {
             Die();
         }
+        Debug.Log(health);
     }
 
     public void Die()

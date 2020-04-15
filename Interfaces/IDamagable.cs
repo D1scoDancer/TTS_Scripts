@@ -2,7 +2,5 @@
 
 public interface IDamagable
 {
-    int CollideDamage { get; set; }
-
-    void onCollisionrEnter2D(Collision2D collision);
+    void OnCollisionEnter2D(Collision2D collision);
 }
