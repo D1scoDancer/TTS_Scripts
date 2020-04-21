@@ -7,8 +7,6 @@ public class Enemy : MonoBehaviour, IKillable
 
     public GameObject deathEffect;
 
-
-
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -16,7 +14,6 @@ public class Enemy : MonoBehaviour, IKillable
         {
             Die();
         }
-        Debug.Log(health);
     }
 
     public void Die()

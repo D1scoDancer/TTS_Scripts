@@ -21,6 +21,9 @@ public class SpiderFighter : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
 
+    public bool shoot;
+    public bool attack;
+
     void Start()
     {
         spiderRigidbody2D = GetComponent<Rigidbody2D>();
@@ -38,18 +41,18 @@ public class SpiderFighter : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        spiderRigidbody2D.velocity = Vector2.right * speed * (facingRight ? 1 : -1);
+        if(!(attack || shoot))
+        {
+            spiderRigidbody2D.velocity = Vector2.right * speed * (facingRight ? 1 : -1);
+        }
+        Fight();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.name);
         if(collision.transform.GetComponent<Player>() != null)
         {
             collision.transform.GetComponent<Player>().TakeDamage(collideDamage);
-            //сделать таймаут получения урона
-
         }
     }
 
@@ -80,18 +83,18 @@ public class SpiderFighter : MonoBehaviour
 
     private void Attack()
     {
-        spiderController.attack = true;
-        collideDamage *= 2;
+        attack = true;
     }
 
     private void Shoot1()
     {
-
+        shoot = true;
+        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
     }
 
     private void Shoot2()
     {
-
+        shoot = true;
     }
 
 
@@ -101,16 +104,19 @@ public class SpiderFighter : MonoBehaviour
         {
             if(Mathf.Abs(distance) < 5)
             {
+                spiderRigidbody2D.velocity = Vector2.zero;
                 Attack();
                 Strafe();
             }
-            else if(Mathf.Abs(distance) < 20)
-            {
-                Shoot2();
-                Strafe();
-            }
+            //else if(Mathf.Abs(distance) < 20)
+            //{
+            //    Shoot2();
+            //    Strafe();
+            //}
             else
             {
+                spiderRigidbody2D.velocity = Vector2.zero;
+               // Debug.Log("fight_shoot1");
                 Shoot1();
                 Strafe();
             }
@@ -120,16 +126,17 @@ public class SpiderFighter : MonoBehaviour
 
 
     /// <summary>
-    /// Отходить от слизи иногда
+    /// Отходить от слизи после действия
     /// </summary>
     private void Strafe()
     {
+        //Debug.Log("strafe");
 
     }
 
     private void ResetValues()
     {
-        collideDamage /= 2;
+        
     }
 
 }
