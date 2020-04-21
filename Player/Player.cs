@@ -6,13 +6,11 @@ public class Player : MonoBehaviour, IKillable
     public GameObject deathEffect;
 
     public int health;
-    SpriteRenderer spr;
-    Color def;
+    bool hit;
 
     private void Start()
     {
-        spr = gameObject.GetComponent<SpriteRenderer>();
-        def = spr.color;
+
     }
     public void Die()
     {
@@ -20,21 +18,41 @@ public class Player : MonoBehaviour, IKillable
         Destroy(gameObject);
     }
 
+    private void Update()
+    {
+        if(hit)
+        {
+            FlashingRed();
+        }
+        ResetValues();
+    }
+
     public void TakeDamage(int damage)
     {
-        Debug.Log("HIT");
         health -= damage;
         if(health <= 0)
         {
             Die();
         }
-        else
-        {
-            spr.color = new Color(247, 47, 47);
-            Debug.Log("before");
-            Invoke("ReturnColor", 2);
-           
-        }
+        hit = true;
+    }
+
+    private void FlashingRed()
+    {
+        GetComponent<SpriteRenderer>().color = Color.red;
+        StartCoroutine(whitecolor());
+    }
+
+    IEnumerator whitecolor()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<SpriteRenderer>().color = Color.white;
+        hit = false;
+    }
+
+    private void ResetValues()
+    {
+        hit = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -44,11 +62,4 @@ public class Player : MonoBehaviour, IKillable
             Die();
         }
     }
-
-    private void ReturnColor()
-    {
-        spr.color = def;
-        Debug.Log("after");
-    }
-
 }
