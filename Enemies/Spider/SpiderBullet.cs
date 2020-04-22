@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SpiderBullet : MonoBehaviour
 {
-    public float speed = 20f;
+    public float speed = 40f;
     public int damage;
     public GameObject impactEffect;
     public GameObject player;
 
-    private List<string> tagsToIgnore = new List<string>() {"Player", "Turn",
+    private List<string> tagsToIgnore = new List<string>() {"Spider", "Turn",
         "Stop", "Rotate","WheelCommand", "JustIgnore" };
 
     void Start()
@@ -26,11 +26,10 @@ public class SpiderBullet : MonoBehaviour
                 Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
             }
         }
-        Enemy enemy = collision.GetComponent<Enemy>();
-        enemy?.TakeDamage(damage);
+        Player player = collision.GetComponent<Player>();
+        player?.TakeDamage(damage);
 
         Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(gameObject);
-
     }
 }
