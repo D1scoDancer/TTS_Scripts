@@ -45,11 +45,14 @@ public class SpiderFighter : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(!(attack || shoot))
+        if(Mathf.Abs(distance) > 75)
         {
-            spiderRigidbody2D.velocity = Vector2.left * speed * (facingRight ? 1 : -1);
+            spiderRigidbody2D.velocity = Vector2.right * speed * (facingRight ? 1 : -1);
         }
-        Fight();
+        else
+        {
+            Fight();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -122,28 +125,26 @@ public class SpiderFighter : MonoBehaviour
 
     private void Fight()
     {
-        if(Mathf.Abs(distance) < 75)
+        spiderRigidbody2D.velocity = Vector2.zero;
+        if(Mathf.Abs(distance) < 5)
         {
-            if(Mathf.Abs(distance) < 5)
-            {
-                spiderRigidbody2D.velocity = Vector2.zero;
-                Attack();
-                Strafe();
-            }
-            else if(Mathf.Abs(distance) < 20)
-            {
-                Shoot2();
-                Strafe();
-            }
-            else
-            {
-                spiderRigidbody2D.velocity = Vector2.zero;
-                // Debug.Log("fight_shoot1");
-                Shoot1();
-                Strafe();
-            }
+
+            Attack();
+            Strafe();
+        }
+        else if(Mathf.Abs(distance) < 20)
+        {
+            Shoot2();
+            Strafe();
+        }
+        else
+        {
+            // Debug.Log("fight_shoot1");
+            Shoot1();
+            Strafe();
         }
     }
+
 
 
 
@@ -157,7 +158,8 @@ public class SpiderFighter : MonoBehaviour
 
     private void ResetValues()
     {
-
+        attack = false;
+        shoot = false;
     }
 
 }

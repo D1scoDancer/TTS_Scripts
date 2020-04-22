@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpiderBullet : MonoBehaviour
 {
-    public float speed = 40f;
+    public float speed = 60f;
     public int damage;
     public GameObject impactEffect;
     public GameObject player;
