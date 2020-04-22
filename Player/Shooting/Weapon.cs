@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
 
+
     // Update is called once per frame
     private void Update()
     {
@@ -23,4 +24,5 @@ public class Weapon : MonoBehaviour
     {
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
     }
+   
 }

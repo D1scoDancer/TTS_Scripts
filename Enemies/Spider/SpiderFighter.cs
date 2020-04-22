@@ -20,8 +20,8 @@ public class SpiderFighter : MonoBehaviour
     // стрельба
     public Transform firePoint;
     public GameObject bulletPrefab;
-    public float fireRate = 1.5f;
-    public float nextFire = Time.time;
+    public float fireRate;
+    float nextFire = Time.time;
 
     public bool shoot;
     public bool attack;
@@ -139,21 +139,17 @@ public class SpiderFighter : MonoBehaviour
         }
         else
         {
-            // Debug.Log("fight_shoot1");
             Shoot1();
             Strafe();
         }
     }
-
-
-
 
     /// <summary>
     /// Отходить от слизи после действия
     /// </summary>
     private void Strafe()
     {
-
+       // spiderRigidbody2D.velocity = Vector2.left * speed * (facingRight ? 1 : -1);
     }
 
     private void ResetValues()
