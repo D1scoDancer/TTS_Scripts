@@ -5,6 +5,7 @@
 /// </summary>
 public class SpiderFighter : MonoBehaviour
 {
+    static System.Random rand = new System.Random();
     private Rigidbody2D spiderRigidbody2D;
     private Animator spiderAnimator;
     private SpiderController spiderController;
@@ -19,13 +20,14 @@ public class SpiderFighter : MonoBehaviour
 
     // стрельба
     public Transform firePoint;
+    public Transform firePointExtra1;
+    public Transform firePointExtra2;
     public GameObject bulletPrefab;
     public float fireRate;
     float nextFire = Time.time;
 
     public bool shoot;
     public bool attack;
-
 
 
     void Start()
@@ -45,12 +47,9 @@ public class SpiderFighter : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(Mathf.Abs(distance) > 75)
+        if(Mathf.Abs(distance) > 10)
         {
             spiderRigidbody2D.velocity = Vector2.right * speed * (facingRight ? 1 : -1);
-        }
-        else
-        {
             Fight();
         }
     }
@@ -107,9 +106,10 @@ public class SpiderFighter : MonoBehaviour
         {
             shoot = true;
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            Instantiate(bulletPrefab, firePointExtra1.position, firePointExtra1.rotation);
+            Instantiate(bulletPrefab, firePointExtra2.position, firePointExtra2.rotation);
         }
     }
-
     private bool CheckIfTimeToFire()
     {
         if(Time.time > nextFire)
@@ -125,31 +125,14 @@ public class SpiderFighter : MonoBehaviour
 
     private void Fight()
     {
-        spiderRigidbody2D.velocity = Vector2.zero;
-        if(Mathf.Abs(distance) < 5)
-        {
-
-            Attack();
-            Strafe();
-        }
-        else if(Mathf.Abs(distance) < 20)
+        if(Mathf.Abs(distance) < 20)
         {
             Shoot2();
-            Strafe();
         }
         else
         {
             Shoot1();
-            Strafe();
         }
-    }
-
-    /// <summary>
-    /// Отходить от слизи после действия
-    /// </summary>
-    private void Strafe()
-    {
-       // spiderRigidbody2D.velocity = Vector2.left * speed * (facingRight ? 1 : -1);
     }
 
     private void ResetValues()
@@ -157,6 +140,5 @@ public class SpiderFighter : MonoBehaviour
         attack = false;
         shoot = false;
     }
-
 }
 
