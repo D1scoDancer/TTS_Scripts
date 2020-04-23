@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private bool facingRight;
     private bool isGrounded;
     private bool jump;
+    private bool climb;
     [SerializeField]
     private bool airControl;
 
@@ -62,7 +63,10 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         isGrounded = IsGrounded();
         HandleMovement(horizontal);
-        HandleCamera();
+        if(!climb)
+        {
+            HandleCamera();
+        }
         Flip(horizontal);
         HandleLayers();
         ResetValues();

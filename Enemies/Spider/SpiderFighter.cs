@@ -36,7 +36,6 @@ public class SpiderFighter : MonoBehaviour
         spiderAnimator = GetComponent<Animator>();
         spiderController = GetComponent<SpiderController>();
         facingRight = true;
-
     }
 
     void Update()
@@ -56,9 +55,11 @@ public class SpiderFighter : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        attack = true;
         if(collision.transform.GetComponent<Player>() != null)
         {
             collision.transform.GetComponent<Player>().TakeDamage(collideDamage);
+            collision.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 100));
         }
     }
 
@@ -84,11 +85,6 @@ public class SpiderFighter : MonoBehaviour
     {
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
-    }
-
-    private void Attack()
-    {
-        attack = true;
     }
 
     private void Shoot1()
