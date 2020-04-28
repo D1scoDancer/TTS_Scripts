@@ -8,14 +8,58 @@ public class Player : MonoBehaviour, IKillable
     public int health;
     bool hit;
 
+    SpriteRenderer spriteRenderer;
+    PlayerController playerController;
+    Rigidbody2D rigidbody2D;
+    BoxCollider2D collider2D;
+    Animator animator;
+    BetterJump betterJump;
+    Weapon weapon;
+
     private void Start()
     {
-
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        playerController = GetComponent<PlayerController>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
+        collider2D = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
+        betterJump = GetComponent<BetterJump>();
+        weapon = GetComponent<Weapon>();
     }
     public void Die()
     {
         Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        DisableComponents();
+    }
+
+    public void Respawn()
+    {
+        // transform.position = new Vector3(savePoint.position.x, savePoint.position.y, savePoint.position.z);
+        EnableComponents();
+    }
+
+    public void DisableComponents()
+    {
+        spriteRenderer.enabled = false;
+        playerController.enabled = false;
+        rigidbody2D.gravityScale = 0f;
+        rigidbody2D.constraints = (RigidbodyConstraints2D)7;
+        collider2D.enabled = false;
+        animator.enabled = false;
+        betterJump.enabled = false;
+        weapon.enabled = false;
+    }
+
+    private void EnableComponents()
+    {
+        spriteRenderer.enabled = true;
+        playerController.enabled = true;
+        rigidbody2D.gravityScale = 1f;
+        rigidbody2D.constraints = (RigidbodyConstraints2D)4;
+        collider2D.enabled = true;
+        animator.enabled = true;
+        betterJump.enabled = true;
+        weapon.enabled = true;
     }
 
     private void Update()
