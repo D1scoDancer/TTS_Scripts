@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.IO;
+using System;
 using System.Runtime.Serialization.Formatters.Binary;
 
 public class SavePoint : MonoBehaviour
@@ -24,16 +25,22 @@ public class SavePoint : MonoBehaviour
     {
         if(isAllowedToSave && Input.GetKeyDown(KeyCode.F))
         {
-            saveInfo.PlayerPosition = transform.position;
-            saveInfo.PlayerHealth = ;
-            saveInfo.SpiderHealth = ;
+            saveInfo.playerPosition = new float[]{ player.transform.position.x, player.transform.position.y, player.transform.position.z };
+            saveInfo.PlayerHealth = player.GetComponent<Player>().health;
+            saveInfo.SpiderHealth = spider.GetComponent<Enemy>().health;
 
             try
             {
-
+                BinaryFormatter formatter = new BinaryFormatter();
+                using(FileStream fs = new FileStream(Application.persistentDataPath + @"\saves\saveFile.bin", FileMode.Create))
+                {
+                    formatter.Serialize(fs, saveInfo);
+                }
+                Debug.Log("Saved");
             }
-            catch
+            catch(Exception e)
             {
+                Debug.Log(e.Message);
                 Debug.Log("exception on serializing");
             }
         }

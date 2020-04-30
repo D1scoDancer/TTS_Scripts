@@ -2,8 +2,7 @@
 
 public class Enemy : MonoBehaviour, IKillable
 {
-    [SerializeField]
-    private int health;
+    public int health;
 
     public GameObject deathEffect;
 
