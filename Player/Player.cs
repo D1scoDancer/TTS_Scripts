@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour, IKillable
 {
@@ -30,11 +31,12 @@ public class Player : MonoBehaviour, IKillable
     {
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         DisableComponents();
+        StartCoroutine("Respawn");
     }
 
-    public void Respawn()
+    public IEnumerator Respawn()
     {
-        // transform.position = new Vector3(savePoint.position.x, savePoint.position.y, savePoint.position.z);
+        yield return new WaitForSeconds(4);
         EnableComponents();
     }
 
