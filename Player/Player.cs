@@ -3,6 +3,8 @@ using UnityEngine;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.SceneManagement;
+
 public class Player : MonoBehaviour, IKillable
 {
     public GameObject deathEffect;
@@ -17,6 +19,7 @@ public class Player : MonoBehaviour, IKillable
     Animator animator;
     BetterJump betterJump;
     Weapon weapon;
+    SaveInformation saveInfo;
 
     private void Start()
     {
@@ -27,6 +30,28 @@ public class Player : MonoBehaviour, IKillable
         animator = GetComponent<Animator>();
         betterJump = GetComponent<BetterJump>();
         weapon = GetComponent<Weapon>();
+
+        if(File.Exists(Application.persistentDataPath + @"\saves\saveFile.bin"))
+        {
+            saveInfo = SaveInformation.getInstance();
+            try
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                using(FileStream fs = new FileStream(Application.persistentDataPath + @"\saves\saveFile.bin", FileMode.Open))
+                {
+                    saveInfo = (SaveInformation)formatter.Deserialize(fs);
+                }
+            }
+            catch(Exception e)
+            {
+                Debug.Log(e.Message);
+                Debug.Log("exception on respawn");
+            }
+            transform.position = new Vector3(saveInfo.playerPosition[0], saveInfo.playerPosition[1], saveInfo.playerPosition[2]);
+            health = saveInfo.PlayerHealth;
+        }
+        
+       
     }
     public void Die()
     {
@@ -37,25 +62,8 @@ public class Player : MonoBehaviour, IKillable
 
     public IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(4);
-        SaveInformation saveInfo = new SaveInformation();
-        try
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-            using(FileStream fs = new FileStream(Application.persistentDataPath + @"\saves\saveFile.bin", FileMode.OpenOrCreate))
-            {
-                saveInfo = (SaveInformation)formatter.Deserialize(fs);
-            }
-        }
-        catch(Exception e)
-        {
-            Debug.Log(e.Message);
-            Debug.Log("exception on respawn");
-        }
-        health = saveInfo.PlayerHealth;
-        transform.position = new Vector3(saveInfo.playerPosition[0], saveInfo.playerPosition[1], saveInfo.playerPosition[2]);
-
-        EnableComponents();
+        yield return new WaitForSeconds(4); 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void DisableComponents()

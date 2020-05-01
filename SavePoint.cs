@@ -17,7 +17,7 @@ public class SavePoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        saveInfo = new SaveInformation();
+        saveInfo = SaveInformation.getInstance(); ;
     }
 
     // Update is called once per frame
