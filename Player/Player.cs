@@ -1,8 +1,6 @@
 ﻿using System.Collections;
-using UnityEngine;
-using System;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IKillable
@@ -51,7 +49,10 @@ public class Player : MonoBehaviour, IKillable
 
     public IEnumerator Respawn()
     {
-        saveInfo.SaveInfoToFile();
+        if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
+        {
+            saveInfo.SaveInfoToFile();
+        }
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

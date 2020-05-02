@@ -30,7 +30,6 @@ public class SavePoint : MonoBehaviour
             saveInfo.PlayerHealth = player.GetComponent<Player>().health;
             saveInfo.SpiderHealth = spider.GetComponent<Enemy>().health;      
             saveInfo.FrogsKilled = GameObject.FindGameObjectsWithTag("Frog").Length == 0;
-
             saveInfo.SaveInfoToFile();
         }
     }
