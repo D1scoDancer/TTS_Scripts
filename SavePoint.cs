@@ -17,7 +17,8 @@ public class SavePoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        saveInfo = SaveInformation.getInstance(); ;
+        saveInfo = SaveInformation.getInstance();
+        saveInfo.SpiderHealth = spider.GetComponent<Enemy>().health;
     }
 
     // Update is called once per frame
@@ -25,24 +26,12 @@ public class SavePoint : MonoBehaviour
     {
         if(isAllowedToSave && Input.GetKeyDown(KeyCode.F))
         {
-            saveInfo.playerPosition = new float[]{ player.transform.position.x, player.transform.position.y, player.transform.position.z };
+            saveInfo.playerPosition = new float[] { player.transform.position.x, player.transform.position.y, player.transform.position.z };
             saveInfo.PlayerHealth = player.GetComponent<Player>().health;
-            saveInfo.SpiderHealth = spider.GetComponent<Enemy>().health;
+            saveInfo.SpiderHealth = spider.GetComponent<Enemy>().health;      
+            saveInfo.FrogsKilled = GameObject.FindGameObjectsWithTag("Frog").Length == 0;
 
-            try
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                using(FileStream fs = new FileStream(Application.persistentDataPath + @"\saves\saveFile.bin", FileMode.Create))
-                {
-                    formatter.Serialize(fs, saveInfo);
-                }
-                Debug.Log("Saved");
-            }
-            catch(Exception e)
-            {
-                Debug.Log(e.Message);
-                Debug.Log("exception on serializing");
-            }
+            saveInfo.SaveInfoToFile();
         }
     }
 

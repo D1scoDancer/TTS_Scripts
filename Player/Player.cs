@@ -23,6 +23,8 @@ public class Player : MonoBehaviour, IKillable
 
     private void Start()
     {
+        saveInfo = SaveInformation.getInstance();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerController = GetComponent<PlayerController>();
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -31,30 +33,17 @@ public class Player : MonoBehaviour, IKillable
         betterJump = GetComponent<BetterJump>();
         weapon = GetComponent<Weapon>();
 
-        if(File.Exists(Application.persistentDataPath + @"\saves\saveFile.bin"))
+        if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
+            saveInfo.ReadInfoFromFile();
             saveInfo = SaveInformation.getInstance();
-            try
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                using(FileStream fs = new FileStream(Application.persistentDataPath + @"\saves\saveFile.bin", FileMode.Open))
-                {
-                    saveInfo = (SaveInformation)formatter.Deserialize(fs);
-                }
-            }
-            catch(Exception e)
-            {
-                Debug.Log(e.Message);
-                Debug.Log("exception on respawn");
-            }
-            transform.position = new Vector3(saveInfo.playerPosition[0], saveInfo.playerPosition[1], saveInfo.playerPosition[2]);
+
+            transform.position = new Vector3(saveInfo.playerPosition[0] + 10, saveInfo.playerPosition[1], saveInfo.playerPosition[2]);
             health = saveInfo.PlayerHealth;
         }
-        
-       
     }
     public void Die()
-    {
+    { 
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         DisableComponents();
         StartCoroutine("Respawn");
@@ -62,7 +51,8 @@ public class Player : MonoBehaviour, IKillable
 
     public IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(4); 
+        saveInfo.SaveInfoToFile();
+        yield return new WaitForSeconds(4);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -78,17 +68,6 @@ public class Player : MonoBehaviour, IKillable
         weapon.enabled = false;
     }
 
-    private void EnableComponents()
-    {
-        spriteRenderer.enabled = true;
-        playerController.enabled = true;
-        rigidbody2D.gravityScale = 1f;
-        rigidbody2D.constraints = (RigidbodyConstraints2D)4;
-        collider2D.enabled = true;
-        animator.enabled = true;
-        betterJump.enabled = true;
-        weapon.enabled = true;
-    }
 
     private void Update()
     {

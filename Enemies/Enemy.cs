@@ -6,6 +6,17 @@ public class Enemy : MonoBehaviour, IKillable
 
     public GameObject deathEffect;
 
+    SaveInformation saveInfo;
+
+    private void Start()
+    {
+        if(gameObject.name == "Spider")
+        {
+            saveInfo = SaveInformation.getInstance();
+            health = saveInfo.SpiderHealth;
+        }
+    }
+
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -13,6 +24,7 @@ public class Enemy : MonoBehaviour, IKillable
         {
             Die();
         }
+        saveInfo.SpiderHealth = health;
     }
 
     public void Die()
