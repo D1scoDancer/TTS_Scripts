@@ -7,11 +7,17 @@ public class TutorialMessage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        hint.gameObject.SetActive(true);
+        if(collision.gameObject.name == "Player")
+        {
+            hint.gameObject.SetActive(true);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        hint.gameObject.SetActive(false); ;
+        if(collision.gameObject.name == "Player")
+        {
+            hint.gameObject.SetActive(false);
+        }
     }
 }
