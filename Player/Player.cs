@@ -22,7 +22,6 @@ public class Player : MonoBehaviour, IKillable
     private void Start()
     {
         saveInfo = SaveInformation.getInstance();
-
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerController = GetComponent<PlayerController>();
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -38,7 +37,7 @@ public class Player : MonoBehaviour, IKillable
 
             transform.position = new Vector3(saveInfo.playerPosition[0] + 10, saveInfo.playerPosition[1], saveInfo.playerPosition[2]);
             health = saveInfo.PlayerHealth;
-        }
+        } 
     }
     public void Die()
     { 

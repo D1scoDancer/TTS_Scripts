@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 [Serializable]
-public class SaveInformation
+public class SaveInformation 
 {
     private static SaveInformation instance;
     private SaveInformation()

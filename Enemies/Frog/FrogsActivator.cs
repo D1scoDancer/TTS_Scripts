@@ -1,12 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.IO;
 using UnityEngine;
 
 public class FrogsActivator : MonoBehaviour
 {
-    SaveInformation saveInfo = SaveInformation.getInstance();
+    SaveInformation saveInfo;
     private void Start()
     {
+        saveInfo = SaveInformation.getInstance();
+        if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
+        {
+            saveInfo.ReadInfoFromFile();
+            saveInfo = SaveInformation.getInstance();
+        }
         if(saveInfo.FrogsKilled)
         {
             Destroy(gameObject);
