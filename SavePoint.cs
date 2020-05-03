@@ -1,10 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
-using TMPro;
-using System.IO;
-using System;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public class SavePoint : MonoBehaviour
 {
@@ -24,7 +19,7 @@ public class SavePoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isAllowedToSave && Input.GetKeyDown(KeyCode.F))
+        if(isAllowedToSave && Input.GetKeyDown(KeyCode.E))
         {
             saveInfo.playerPosition = new float[] { player.transform.position.x, player.transform.position.y, player.transform.position.z };
             saveInfo.PlayerHealth = player.GetComponent<Player>().health;
