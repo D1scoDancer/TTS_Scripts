@@ -1,198 +1,116 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IKillable
 {
-    private Rigidbody2D myRigidbody2D;
-    private Animator myAnimator;
-    private BoxCollider2D myBoxCollider2D;
+    public GameObject deathEffect;
 
-    [SerializeField]
-    private LayerMask whatIsGround;
+    public int health;
+    bool hit;
 
-    [SerializeField]
-    private Transform[] groundPoints;
+    SpriteRenderer spriteRenderer;
+    PlayerController playerController;
+    Rigidbody2D rigidbody2D;
+    BoxCollider2D collider2D;
+    Animator animator;
+    BetterJump betterJump;
+    Weapon weapon;
+    SaveInformation saveInfo;
 
-    [SerializeField]
-    private float speed = 0; // скорость движения по x
-    [SerializeField]
-    private float groundRadius;
-    [SerializeField]
-    private float jumpForce;
-
-    private bool facingRight;
-    private bool attack;
-    private bool isGrounded;
-    private bool jump;
-    [SerializeField]
-    private bool airControl;
-
-
-
-    /// <summary>
-    /// Начинает работу в начале сцены
-    /// </summary>
     private void Start()
     {
-        facingRight = true;
-        myRigidbody2D = GetComponent<Rigidbody2D>();
-        myAnimator = GetComponent<Animator>();
+        saveInfo = SaveInformation.getInstance();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        playerController = GetComponent<PlayerController>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
+        collider2D = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
+        betterJump = GetComponent<BetterJump>();
+        weapon = GetComponent<Weapon>();
+
+        if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
+        {
+            saveInfo.ReadInfoFromFile();
+            saveInfo = SaveInformation.getInstance();
+
+            transform.position = new Vector3(saveInfo.playerPosition[0] + 10, saveInfo.playerPosition[1], saveInfo.playerPosition[2]);
+            health = saveInfo.PlayerHealth;
+        } 
+    }
+    public void Die()
+    { 
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
+        DisableComponents();
+        StartCoroutine("Respawn");
     }
 
-    /// <summary>
-    /// Обновляется каждый кадр
-    /// </summary>
+    public IEnumerator Respawn()
+    {
+        if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
+        {
+            saveInfo.SaveInfoToFile();
+        }
+        yield return new WaitForSeconds(4);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void DisableComponents()
+    {
+        spriteRenderer.enabled = false;
+        playerController.enabled = false;
+        rigidbody2D.gravityScale = 0f;
+        rigidbody2D.constraints = (RigidbodyConstraints2D)7;
+        collider2D.enabled = false;
+        animator.enabled = false;
+        betterJump.enabled = false;
+        weapon.enabled = false;
+    }
+
+
     private void Update()
     {
-        HandleInput();
-    }
-
-    /// <summary>
-    /// Обновляется каждую единицу времени
-    /// </summary>
-    private void FixedUpdate()
-    {
-        float horizontal = Input.GetAxis("Horizontal");
-        isGrounded = IsGrounded();
-        HandleMovement(horizontal);
-        Flip(horizontal);
-        HandleAttacks();
-        HandleLayers();
+        if(hit)
+        {
+            FlashingRed();
+        }
         ResetValues();
     }
 
-    /// <summary>
-    /// Движение
-    /// </summary>
-    /// <param name="horizontal"></param>
-    private void HandleMovement(float horizontal)
+    public void TakeDamage(int damage)
     {
-        if(myRigidbody2D.velocity.y < 0)
+        health -= damage;
+        if(health <= 0)
         {
-            myAnimator.SetBool("land", true);
+            Die();
         }
-        if(!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("attack") && (isGrounded || airControl)) //нельзя двигаться пока идет атака
-        {
-            myRigidbody2D.velocity = new Vector2(horizontal * speed, myRigidbody2D.velocity.y);
-        }
-        if(isGrounded && jump)
-        {
-            isGrounded = false;
-            myRigidbody2D.AddForce(new Vector2(0, jumpForce));
-            myAnimator.SetTrigger("jump");
-        }
-        myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
+        hit = true;
     }
 
-    /// <summary>
-    /// Атаки
-    /// </summary>
-    private void HandleAttacks()
+    private void FlashingRed()
     {
-        if(attack && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("attack"))
-        {
-            myAnimator.SetTrigger("attack");
-            myRigidbody2D.velocity = Vector2.zero;
-        }
+        GetComponent<SpriteRenderer>().color = Color.red;
+        StartCoroutine(whitecolor());
     }
 
-
-    /// <summary>
-    /// Ввод
-    /// </summary>
-    private void HandleInput()
+    IEnumerator whitecolor()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            jump = true;
-        }
-        if(Input.GetMouseButtonDown(0))
-        {
-            attack = true;
-        }
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<SpriteRenderer>().color = Color.white;
+        hit = false;
     }
 
-    /// <summary>
-    /// Поворот персонажа
-    /// </summary>
-    /// <param name="horizontal"></param>
-    private void Flip(float horizontal)
-    {
-        if(horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
-        {
-            facingRight = !facingRight;
-
-            transform.Rotate(0, 180, 0);
-        }
-    }
-
-    /// <summary>
-    /// Проверка стоит ли персонаж на земле
-    /// Сталкивются ли точки с чем то кроме персонажа
-    /// </summary>
-    /// <returns></returns>
-    private bool IsGrounded()
-    {
-        if(myRigidbody2D.velocity.y <= 0)
-        {
-            foreach(var point in groundPoints)
-            {
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(point.position, groundRadius, whatIsGround);
-
-                foreach(var collider in colliders)
-                {
-                    if(collider.gameObject != gameObject)
-                    {
-                        myAnimator.ResetTrigger("jump");
-                        myAnimator.SetBool("land", false);
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    private void HandleLayers()
-    {
-        if(!isGrounded)
-        {
-            myAnimator.SetLayerWeight(1, 1);
-        }
-        else
-        {
-            myAnimator.SetLayerWeight(1, 0);
-        }
-    }
-
-    /// <summary>
-    /// Сброс значений
-    /// </summary>
     private void ResetValues()
     {
-        jump = false;
-        attack = false;
+        hit = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.name.Contains("Platform"))
+        if(collision.gameObject.layer == 4)
         {
-            this.transform.parent = collision.transform;
+            Die();
         }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if(collision.gameObject.name.Contains("MovingPlatform"))
-        {
-            this.transform.parent = null;
-        }
-    }
-
-    public float GetXPosition()
-    {
-        return myRigidbody2D.position.x;
     }
 }

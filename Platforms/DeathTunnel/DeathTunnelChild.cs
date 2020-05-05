@@ -6,7 +6,14 @@ public class DeathTunnelChild : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(1);
+        if(collision.gameObject.name == "Player")
+        {
+            if(collision.transform.GetComponent<PlayerController>().IsGrounded())
+            {
+                collision.transform.GetComponent<Player>().Die();
+            }
+        }
+
         if(collision.gameObject.name == "LongPlatformDown")
         {
             transform.parent.GetComponent<DeathTunnel>().trap = false;
