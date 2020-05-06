@@ -21,6 +21,8 @@ public class DialogueDisplay : MonoBehaviour
 
         speakerUILeft.Speaker = conversation.speakerLeft;
         speakerUIRight.Speaker = conversation.speakerRight;
+
+        AdvanceConversation();
     }
 
     private void Update()
@@ -31,7 +33,7 @@ public class DialogueDisplay : MonoBehaviour
         }
     }
 
-    private void AdvanceConversation()
+    public void AdvanceConversation()
     {
         if(activeLineIndex < conversation.lines.Length)
         {
@@ -63,7 +65,21 @@ public class DialogueDisplay : MonoBehaviour
 
     private void SetDialogue(SpeakerUI activeSpeakerUI, SpeakerUI inactiveSpeakerUI, string text)
     {
-        activeSpeakerUI.Dialog = text;
+        inactiveSpeakerUI.Hide();
         activeSpeakerUI.Show();
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(activeSpeakerUI, text));
+    }
+
+    private IEnumerator TypeSentence(SpeakerUI activeSpeakerUI, string text)
+    {
+        activeSpeakerUI.Dialog = "";
+        foreach(char letter in text.ToCharArray())
+        {
+            activeSpeakerUI.Dialog += letter;
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

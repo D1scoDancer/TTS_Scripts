@@ -23,6 +23,7 @@ public class SpeakerUI : MonoBehaviour
     public string Dialog
     {
         set { dialog.text = value; }
+        get => dialog.text;
     }
 
     public bool HasSpeaker()
