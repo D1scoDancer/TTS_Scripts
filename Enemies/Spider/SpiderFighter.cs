@@ -13,7 +13,7 @@ public class SpiderFighter : MonoBehaviour
     [SerializeField]
     private Player player;  // чтобы отслеживать положение противника
 
-    private bool facingRight;
+    public bool facingRight;
     public float speed;
     public int collideDamage;
     private float distance;
@@ -35,7 +35,6 @@ public class SpiderFighter : MonoBehaviour
         spiderRigidbody2D = GetComponent<Rigidbody2D>();
         spiderAnimator = GetComponent<Animator>();
         spiderController = GetComponent<SpiderController>();
-        facingRight = true;
     }
 
     void Update()
@@ -81,7 +80,7 @@ public class SpiderFighter : MonoBehaviour
     /// <summary>
     /// Разворот
     /// </summary>
-    private void Flip()
+    public void Flip()
     {
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);

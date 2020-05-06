@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class SpiderWaiter : MonoBehaviour
@@ -9,6 +7,7 @@ public class SpiderWaiter : MonoBehaviour
     public GameObject player;
     Enemy enemy;
     SaveInformation saveInfo;
+
     void Start()
     {
         saveInfo = SaveInformation.getInstance();

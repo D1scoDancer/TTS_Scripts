@@ -23,9 +23,11 @@ public class SaveInformation
 
     public bool FrogsKilled { get; set; } = GameObject.FindGameObjectsWithTag("Frog").Length == 0;
 
+    public int dialogNumber = 0;
+
     public override string ToString()
     {
-        return $"PlayerHealth: {PlayerHealth}; SpiderHealth: {SpiderHealth}; FrogsKilled: {FrogsKilled};";
+        return $"PlayerHealth: {PlayerHealth}; SpiderHealth: {SpiderHealth}; FrogsKilled: {FrogsKilled}; DialogNumber: {dialogNumber}";
     }
 
     public void SaveInfoToFile()
@@ -37,7 +39,6 @@ public class SaveInformation
             {
                 formatter.Serialize(fs, instance);
             }
-            Debug.Log("Saved");
             Debug.Log(instance.ToString());
         }
         catch(Exception e)

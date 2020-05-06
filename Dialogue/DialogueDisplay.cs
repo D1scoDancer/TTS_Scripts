@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DialogueDisplay : MonoBehaviour
 {
+    public Plot plot;
     public Conversation conversation;
 
     public GameObject speakerLeft;
@@ -14,8 +15,15 @@ public class DialogueDisplay : MonoBehaviour
 
     private int activeLineIndex = 0;
 
+    public DialogueActivator activator;
+
+    SaveInformation saveInfo;
+
     private void Start()
     {
+        saveInfo = SaveInformation.getInstance();
+        conversation = plot.plot[saveInfo.dialogNumber];
+
         speakerUILeft = speakerLeft.GetComponent<SpeakerUI>();
         speakerUIRight = speakerRight.GetComponent<SpeakerUI>();
 
@@ -23,11 +31,13 @@ public class DialogueDisplay : MonoBehaviour
         speakerUIRight.Speaker = conversation.speakerRight;
 
         AdvanceConversation();
+
+        saveInfo.dialogNumber++;
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             AdvanceConversation();
         }
@@ -45,6 +55,8 @@ public class DialogueDisplay : MonoBehaviour
             speakerUILeft.Hide();
             speakerUIRight.Hide();
             activeLineIndex = 0;
+            activator.StartFight();
+            this.enabled = false;
         }
     }
 
