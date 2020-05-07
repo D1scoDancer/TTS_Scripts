@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class DialogueDisplay : MonoBehaviour
@@ -22,6 +22,11 @@ public class DialogueDisplay : MonoBehaviour
     private void Start()
     {
         saveInfo = SaveInformation.getInstance();
+        if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
+        {
+            saveInfo.ReadInfoFromFile();
+            saveInfo = SaveInformation.getInstance();
+        }
         conversation = plot.plot[saveInfo.dialogNumber];
 
         speakerUILeft = speakerLeft.GetComponent<SpeakerUI>();
@@ -57,7 +62,11 @@ public class DialogueDisplay : MonoBehaviour
             activeLineIndex = 0;
             activator.StartFight();
             this.enabled = false;
-            FindObjectOfType<AudioManager>().Play("BossBattle");
+            if(saveInfo.dialogNumber <= 2)
+            {
+                FindObjectOfType<AudioManager>().Stop("MainTheme");
+                FindObjectOfType<AudioManager>().Play("BossBattle");
+            }
         }
     }
 

@@ -21,7 +21,8 @@ public class SaveInformation
 
     public float[] playerPosition = new float[3];
 
-    public bool FrogsKilled { get; set; } = GameObject.FindGameObjectsWithTag("Frog").Length == 0;
+    public bool FrogsKilled { get; set; }
+    // public bool FrogsKilled { get; set; } = GameObject.FindGameObjectsWithTag("Frog").Length == 0;
 
     public int dialogNumber = 0;
 
@@ -34,6 +35,7 @@ public class SaveInformation
     {  
         try
         {
+            FrogsKilled = GameObject.FindGameObjectsWithTag("Frog").Length == 0;
             BinaryFormatter formatter = new BinaryFormatter();
             using(FileStream fs = new FileStream(Application.persistentDataPath + @"\saveFile.bin", FileMode.Create))
             {

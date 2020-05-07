@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using System.IO;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
@@ -41,20 +42,42 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Play();
+        Debug.Log("Playing" + s.name);
     }
 
     private void Start()
     {
         saveInfo = SaveInformation.getInstance();
-        saveInfo.ReadInfoFromFile();
-        saveInfo = SaveInformation.getInstance();
-        if(saveInfo.dialogNumber >= 2)
+        if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
-            Play("BossBattle");
+            saveInfo.ReadInfoFromFile();
+            saveInfo = SaveInformation.getInstance();
         }
-        else
+
+        if(saveInfo.dialogNumber == 0)
         {
             Play("MainTheme");
         }
+        else if(saveInfo.dialogNumber == 1)
+        {
+            Stop("BossBattle");
+            Play("MainTheme");
+        }
+        else
+        {
+            Stop("BossBattle");
+            Play("BossBattle");
+        }
+    }
+
+    public void Stop(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if(s == null)
+        {
+            return;
+        }
+        s.source.Stop();
+        Debug.Log("Stopping" + s.name);
     }
 }

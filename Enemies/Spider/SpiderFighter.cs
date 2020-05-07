@@ -24,7 +24,7 @@ public class SpiderFighter : MonoBehaviour
     public Transform firePointExtra2;
     public GameObject bulletPrefab;
     public float fireRate;
-    float nextFire = Time.time;
+    float nextFire;
 
     public bool shoot;
     public bool attack;
@@ -32,6 +32,7 @@ public class SpiderFighter : MonoBehaviour
 
     void Start()
     {
+        nextFire = Time.time;
         spiderRigidbody2D = GetComponent<Rigidbody2D>();
         spiderAnimator = GetComponent<Animator>();
         spiderController = GetComponent<SpiderController>();
