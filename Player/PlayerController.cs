@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
             myRigidbody2D.AddForce(new Vector2(0, jumpForce));
             myAnimator.SetTrigger("jump");
+            FindObjectOfType<AudioManager>().Play("Jump");
         }
         myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }
