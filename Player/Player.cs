@@ -40,7 +40,8 @@ public class Player : MonoBehaviour, IKillable
         } 
     }
     public void Die()
-    { 
+    {
+        FindObjectOfType<AudioManager>().Play("Death");
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         DisableComponents();
         StartCoroutine("Respawn");

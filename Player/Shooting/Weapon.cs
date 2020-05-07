@@ -17,6 +17,7 @@ public class Weapon : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0) && spriteRenderer.color.b > 0.5)
         {
+            FindObjectOfType<AudioManager>().Play("Shoot");
             Shoot();
         } 
     }

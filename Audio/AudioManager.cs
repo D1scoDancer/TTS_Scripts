@@ -6,6 +6,8 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
 
+    private SaveInformation saveInfo;
+
     private void Awake()
     {
         if(instance == null)
@@ -43,6 +45,16 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        Play("MainTheme");
+        saveInfo = SaveInformation.getInstance();
+        saveInfo.ReadInfoFromFile();
+        saveInfo = SaveInformation.getInstance();
+        if(saveInfo.dialogNumber >= 2)
+        {
+            Play("BossBattle");
+        }
+        else
+        {
+            Play("MainTheme");
+        }
     }
 }

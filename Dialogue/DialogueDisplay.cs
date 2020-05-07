@@ -57,6 +57,7 @@ public class DialogueDisplay : MonoBehaviour
             activeLineIndex = 0;
             activator.StartFight();
             this.enabled = false;
+            FindObjectOfType<AudioManager>().Play("BossBattle");
         }
     }
 
