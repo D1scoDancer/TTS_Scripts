@@ -42,7 +42,6 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Play();
-        Debug.Log("Playing" + s.name);
     }
 
     private void Start()
@@ -78,6 +77,5 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Stop();
-        Debug.Log("Stopping" + s.name);
     }
 }
