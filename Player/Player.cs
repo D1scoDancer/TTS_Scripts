@@ -41,6 +41,7 @@ public class Player : MonoBehaviour, IKillable
     }
     public void Die()
     {
+        health = 0;
         FindObjectOfType<AudioManager>().Play("Death");
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         DisableComponents();
@@ -51,6 +52,7 @@ public class Player : MonoBehaviour, IKillable
     {
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
+            saveInfo = SaveInformation.getInstance();
             saveInfo.SaveInfoToFile();
         }
         yield return new WaitForSeconds(4);
@@ -61,6 +63,7 @@ public class Player : MonoBehaviour, IKillable
             FindObjectOfType<AudioManager>().Stop("BossBattle");
             FindObjectOfType<AudioManager>().Play("MainTheme");
         }
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

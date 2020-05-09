@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 [Serializable]
-public class SaveInformation 
+public class SaveInformation
 {
     private static SaveInformation instance;
     private SaveInformation()
@@ -17,7 +17,7 @@ public class SaveInformation
         return instance;
     }
     public int PlayerHealth { get; set; }
-    public int SpiderHealth { get; set; } = 300;
+    public int SpiderHealth { get; set; }
 
     public float[] playerPosition = new float[3];
 
@@ -32,10 +32,11 @@ public class SaveInformation
     }
 
     public void SaveInfoToFile()
-    {  
+    {
         try
         {
             FrogsKilled = GameObject.FindGameObjectsWithTag("Frog").Length == 0;
+            SpiderHealth = UnityEngine.Object.FindObjectOfType<SpiderFighter>().gameObject.GetComponent<Enemy>().health;
             BinaryFormatter formatter = new BinaryFormatter();
             using(FileStream fs = new FileStream(Application.persistentDataPath + @"\saveFile.bin", FileMode.Create))
             {

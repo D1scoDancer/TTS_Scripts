@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.IO;
 
 public class Enemy : MonoBehaviour, IKillable
 {
@@ -13,6 +14,12 @@ public class Enemy : MonoBehaviour, IKillable
         if(gameObject.name == "Spider")
         {
             saveInfo = SaveInformation.getInstance();
+            if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
+            {
+                saveInfo.ReadInfoFromFile();
+            }
+            saveInfo = SaveInformation.getInstance();
+
             health = saveInfo.SpiderHealth;
         }
     }
