@@ -14,9 +14,6 @@ public class SpiderBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.layer);
-        Debug.Log(collision.gameObject.name);
-
         Player player = collision.GetComponent<Player>();
         player?.TakeDamage(damage);
 
