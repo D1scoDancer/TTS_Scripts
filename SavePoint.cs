@@ -23,9 +23,10 @@ public class SavePoint : MonoBehaviour
         {
             saveInfo.playerPosition = new float[] { player.transform.position.x, player.transform.position.y, player.transform.position.z };
             saveInfo.PlayerHealth = player.GetComponent<Player>().health;
-            saveInfo.SpiderHealth = spider.GetComponent<Enemy>().health;      
+            saveInfo.SpiderHealth = spider.GetComponent<Enemy>().health;
             saveInfo.FrogsKilled = GameObject.FindGameObjectsWithTag("Frog").Length == 0;
             saveInfo.SaveInfoToFile();
+            FindObjectOfType<AudioManager>().Play("Save");
         }
     }
 

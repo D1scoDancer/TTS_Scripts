@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour, IKillable
 
     public void TakeDamage(int damage)
     {
+        Debug.Log(health);
         health -= damage;
         if(health <= 0)
         {

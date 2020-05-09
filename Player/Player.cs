@@ -54,9 +54,10 @@ public class Player : MonoBehaviour, IKillable
             saveInfo.SaveInfoToFile();
         }
         yield return new WaitForSeconds(4);
+
+        saveInfo = SaveInformation.getInstance();
         if(saveInfo.dialogNumber == 1)
         {
-            Debug.Log(123);
             FindObjectOfType<AudioManager>().Stop("BossBattle");
             FindObjectOfType<AudioManager>().Play("MainTheme");
         }
@@ -98,10 +99,10 @@ public class Player : MonoBehaviour, IKillable
     private void FlashingRed()
     {
         GetComponent<SpriteRenderer>().color = Color.red;
-        StartCoroutine(whitecolor());
+        StartCoroutine(WhiteColor());
     }
 
-    IEnumerator whitecolor()
+    IEnumerator WhiteColor()
     {
         yield return new WaitForSeconds(0.5f);
         GetComponent<SpriteRenderer>().color = Color.white;

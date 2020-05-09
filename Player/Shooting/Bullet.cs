@@ -12,10 +12,6 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         GetComponent<Rigidbody2D>().velocity = transform.right * speed;
-
-        Physics2D.IgnoreLayerCollision(14, 9); // ignore commands
-        Physics2D.IgnoreLayerCollision(14, 11); //ingnore player
-        Physics2D.IgnoreLayerCollision(14, 12); //ignore ignore
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

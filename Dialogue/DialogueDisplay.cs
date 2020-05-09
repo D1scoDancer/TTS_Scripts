@@ -35,9 +35,10 @@ public class DialogueDisplay : MonoBehaviour
         speakerUILeft.Speaker = conversation.speakerLeft;
         speakerUIRight.Speaker = conversation.speakerRight;
 
+        saveInfo.dialogNumber++;
         AdvanceConversation();
 
-        saveInfo.dialogNumber++;
+        
     }
 
     private void Update()
