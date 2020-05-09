@@ -49,7 +49,7 @@ public class AudioManager : MonoBehaviour
         saveInfo = SaveInformation.getInstance();
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
-            saveInfo.ReadInfoFromFile();
+            SaveInformation.ReadInfoFromFile();
             saveInfo = SaveInformation.getInstance();
         }
 

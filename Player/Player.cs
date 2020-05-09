@@ -32,7 +32,7 @@ public class Player : MonoBehaviour, IKillable
 
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
-            saveInfo.ReadInfoFromFile();
+            SaveInformation.ReadInfoFromFile();
             saveInfo = SaveInformation.getInstance();
 
             transform.position = new Vector3(saveInfo.playerPosition[0] + 10, saveInfo.playerPosition[1], saveInfo.playerPosition[2]);
@@ -41,6 +41,7 @@ public class Player : MonoBehaviour, IKillable
     }
     public void Die()
     {
+        Debug.Log(GameObject.Find("Spider").GetComponent<Enemy>().health + "!!!");
         health = 0;
         FindObjectOfType<AudioManager>().Play("Death");
         Instantiate(deathEffect, transform.position, Quaternion.identity);
@@ -52,8 +53,8 @@ public class Player : MonoBehaviour, IKillable
     {
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
-            saveInfo = SaveInformation.getInstance();
-            saveInfo.SaveInfoToFile();
+            Debug.Log("respawn"+saveInfo.SpiderHealth);
+            SaveInformation.SaveInfoToFile(saveInfo);
         }
         yield return new WaitForSeconds(4);
 

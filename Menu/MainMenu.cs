@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour
 {
     public void Continue()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Level-01-Cave");
     }
 
     public void NewGame()
@@ -22,7 +22,7 @@ public class MainMenu : MonoBehaviour
         {
             Debug.Log("exeption on deleting save file");
         }
-        Continue();
+        SceneManager.LoadScene("LoadScreen 0");
     }
 
     public void QuitGame()

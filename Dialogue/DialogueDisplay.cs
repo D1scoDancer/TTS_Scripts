@@ -24,7 +24,7 @@ public class DialogueDisplay : MonoBehaviour
         saveInfo = SaveInformation.getInstance();
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
-            saveInfo.ReadInfoFromFile();
+            SaveInformation.ReadInfoFromFile();
             saveInfo = SaveInformation.getInstance();
         }
         conversation = plot.plot[saveInfo.dialogNumber];

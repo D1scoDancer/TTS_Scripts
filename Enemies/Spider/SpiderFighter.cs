@@ -56,7 +56,7 @@ public class SpiderFighter : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         attack = true;
-        if(collision.transform.GetComponent<Player>() != null)
+        if(collision.gameObject.name == "Player")
         {
             collision.transform.GetComponent<Player>().TakeDamage(collideDamage);
             collision.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 100));

@@ -26,23 +26,26 @@ public class SaveInformation
 
     public int dialogNumber = 0;
 
+    public bool[] screens = new bool[3];
+
     public override string ToString()
     {
-        return $"PlayerHealth: {PlayerHealth}; SpiderHealth: {SpiderHealth}; FrogsKilled: {FrogsKilled}; DialogNumber: {dialogNumber}";
+        return $"PlayerHealth: {PlayerHealth}; SpiderHealth: {SpiderHealth}; FrogsKilled: {FrogsKilled}; DialogNumber: {dialogNumber}, screens: {screens[0]},{screens[1]},{screens[2]}";
     }
 
-    public void SaveInfoToFile()
+    public static void SaveInfoToFile(SaveInformation save)
     {
         try
         {
-            FrogsKilled = GameObject.FindGameObjectsWithTag("Frog").Length == 0;
-            SpiderHealth = UnityEngine.Object.FindObjectOfType<SpiderFighter>().gameObject.GetComponent<Enemy>().health;
+            Debug.Log("saving" + save.SpiderHealth);
+            save.FrogsKilled = GameObject.FindGameObjectsWithTag("Frog").Length == 0;
+            save.SpiderHealth = UnityEngine.Object.FindObjectOfType<SpiderFighter>().gameObject.GetComponent<Enemy>().health;
             BinaryFormatter formatter = new BinaryFormatter();
             using(FileStream fs = new FileStream(Application.persistentDataPath + @"\saveFile.bin", FileMode.Create))
             {
-                formatter.Serialize(fs, instance);
+                formatter.Serialize(fs, save);
             }
-            Debug.Log(instance.ToString());
+            Debug.Log(instance);
         }
         catch(Exception e)
         {
@@ -51,7 +54,8 @@ public class SaveInformation
         }
     }
 
-    public void ReadInfoFromFile()
+
+    public static void ReadInfoFromFile()
     {
         try
         {

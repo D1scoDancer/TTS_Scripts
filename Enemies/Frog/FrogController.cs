@@ -43,6 +43,10 @@ public class FrogController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.layer == 4)
+        {
+            GetComponent<Enemy>().Die();
+        }
         if(collision.gameObject.CompareTag("Turn"))
         {
             movingRight = !movingRight;
@@ -51,4 +55,5 @@ public class FrogController : MonoBehaviour
         myAnimator.SetBool("moving", moving);
         freezeTime = DateTime.Now;
     }
+
 }

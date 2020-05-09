@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour, IKillable
             saveInfo = SaveInformation.getInstance();
             if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
             {
-                saveInfo.ReadInfoFromFile();
+                SaveInformation.ReadInfoFromFile();
             }
             saveInfo = SaveInformation.getInstance();
 
@@ -25,7 +25,6 @@ public class Enemy : MonoBehaviour, IKillable
 
     public void TakeDamage(int damage)
     {
-        Debug.Log(health);
         health -= damage;
         if(health <= 0)
         {
@@ -34,7 +33,7 @@ public class Enemy : MonoBehaviour, IKillable
 
         if(gameObject.name == "Spider")
         {
-            saveInfo.PlayerHealth = health;
+            Debug.Log(health);
         }
 
     }

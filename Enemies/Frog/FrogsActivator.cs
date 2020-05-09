@@ -9,7 +9,7 @@ public class FrogsActivator : MonoBehaviour
         saveInfo = SaveInformation.getInstance();
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
-            saveInfo.ReadInfoFromFile();
+            SaveInformation.ReadInfoFromFile();
             saveInfo = SaveInformation.getInstance();
             if(saveInfo.FrogsKilled)
             {
