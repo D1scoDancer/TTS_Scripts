@@ -37,7 +37,7 @@ public class Player : MonoBehaviour, IKillable
 
             transform.position = new Vector3(saveInfo.playerPosition[0] + 10, saveInfo.playerPosition[1], saveInfo.playerPosition[2]);
             health = saveInfo.PlayerHealth;
-        } 
+        }
     }
     public void Die()
     {
@@ -54,6 +54,12 @@ public class Player : MonoBehaviour, IKillable
             saveInfo.SaveInfoToFile();
         }
         yield return new WaitForSeconds(4);
+        if(saveInfo.dialogNumber == 1)
+        {
+            Debug.Log(123);
+            FindObjectOfType<AudioManager>().Stop("BossBattle");
+            FindObjectOfType<AudioManager>().Play("MainTheme");
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
