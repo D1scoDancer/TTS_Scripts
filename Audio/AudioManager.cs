@@ -32,8 +32,6 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
-
-      
     }
 
     public void Play(string name)
