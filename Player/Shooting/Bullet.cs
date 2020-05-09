@@ -9,23 +9,17 @@ public class Bullet : MonoBehaviour
     public GameObject impactEffect;
     public GameObject player;
 
-    private List<string> tagsToIgnore = new List<string>() {"Player", "Turn",
-        "Stop", "Rotate","WheelCommand", "JustIgnore" };
-
     void Start()
     {
         GetComponent<Rigidbody2D>().velocity = transform.right * speed;
+
+        Physics2D.IgnoreLayerCollision(14, 9); // ignore commands
+        Physics2D.IgnoreLayerCollision(14, 11); //ingnore player
+        Physics2D.IgnoreLayerCollision(14, 12); //ignore ignore
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        foreach(string tag in tagsToIgnore)
-        {
-            if(collision.gameObject.CompareTag(tag))
-            {
-                Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
-            }
-        }
         Enemy enemy = collision.GetComponent<Enemy>();
         enemy?.TakeDamage(damage);
 
