@@ -21,12 +21,14 @@ public class DialogueDisplay : MonoBehaviour
 
     private void Start()
     {
-        saveInfo = SaveInformation.getInstance();
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
             SaveInformation.ReadInfoFromFile();
             saveInfo = SaveInformation.getInstance();
+            Debug.Log(saveInfo.SpiderHealth);
         }
+        saveInfo = SaveInformation.getInstance();
+
         conversation = plot.plot[saveInfo.dialogNumber];
 
         speakerUILeft = speakerLeft.GetComponent<SpeakerUI>();
@@ -38,7 +40,7 @@ public class DialogueDisplay : MonoBehaviour
         saveInfo.dialogNumber++;
         AdvanceConversation();
 
-        
+
     }
 
     private void Update()

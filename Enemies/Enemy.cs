@@ -13,10 +13,11 @@ public class Enemy : MonoBehaviour, IKillable
     {
         if(gameObject.name == "Spider")
         {
-            saveInfo = SaveInformation.getInstance();
             if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
             {
                 SaveInformation.ReadInfoFromFile();
+                saveInfo = SaveInformation.getInstance();
+                Debug.Log(saveInfo.SpiderHealth);
             }
             saveInfo = SaveInformation.getInstance();
 

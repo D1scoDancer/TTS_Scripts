@@ -11,6 +11,7 @@ public class FrogsActivator : MonoBehaviour
         {
             SaveInformation.ReadInfoFromFile();
             saveInfo = SaveInformation.getInstance();
+            Debug.Log(saveInfo.SpiderHealth);
             if(saveInfo.FrogsKilled)
             {
                 Destroy(gameObject);

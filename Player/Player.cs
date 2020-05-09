@@ -19,6 +19,15 @@ public class Player : MonoBehaviour, IKillable
     Weapon weapon;
     SaveInformation saveInfo;
 
+    private void Awake()
+    {
+        if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
+        {
+            SaveInformation.ReadInfoFromFile();
+            saveInfo = SaveInformation.getInstance();
+        }
+
+    }
     private void Start()
     {
         saveInfo = SaveInformation.getInstance();
@@ -53,7 +62,7 @@ public class Player : MonoBehaviour, IKillable
     {
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
-            Debug.Log("respawn"+saveInfo.SpiderHealth);
+            Debug.Log("respawn" + saveInfo.SpiderHealth);
             SaveInformation.SaveInfoToFile(saveInfo);
         }
         yield return new WaitForSeconds(4);

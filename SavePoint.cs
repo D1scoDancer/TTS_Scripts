@@ -25,8 +25,6 @@ public class SavePoint : MonoBehaviour
             SaveInformation.ReadInfoFromFile();
             saveInfo = SaveInformation.getInstance();
         }
-
-        saveInfo.SpiderHealth = spider.GetComponent<Enemy>().health;
         activatedFirst = saveInfo.screens[orderNumber - 1];
     }
     // Update is called once per frame
@@ -36,6 +34,7 @@ public class SavePoint : MonoBehaviour
         {
             saveInfo.playerPosition = new float[] { player.transform.position.x, player.transform.position.y, player.transform.position.z };
             saveInfo.PlayerHealth = player.GetComponent<Player>().health;
+            saveInfo.SpiderHealth = spider.GetComponent<Enemy>().health;
             saveInfo.FrogsKilled = GameObject.FindGameObjectsWithTag("Frog").Length == 0;
             if(!activatedFirst)
             {
