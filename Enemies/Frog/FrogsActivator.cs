@@ -11,11 +11,22 @@ public class FrogsActivator : MonoBehaviour
         {
             saveInfo.ReadInfoFromFile();
             saveInfo = SaveInformation.getInstance();
+            if(saveInfo.FrogsKilled)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                foreach(Transform frog in transform)
+                {
+                    if(frog.name.Contains("Frog"))
+                    {
+                        frog.GetComponent<FrogController>().enabled = true;
+                    }
+                }
+            }
         }
-        if(saveInfo.FrogsKilled)
-        {
-            Destroy(gameObject);
-        }
+       
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

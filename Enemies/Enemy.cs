@@ -20,7 +20,6 @@ public class Enemy : MonoBehaviour, IKillable
             }
             saveInfo = SaveInformation.getInstance();
 
-            health = saveInfo.SpiderHealth;
         }
     }
 
@@ -32,12 +31,21 @@ public class Enemy : MonoBehaviour, IKillable
         {
             Die();
         }
-        saveInfo.SpiderHealth = health;
+
+        if(gameObject.name == "Spider")
+        {
+            saveInfo.PlayerHealth = health;
+        }
+
     }
 
     public void Die()
     {
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        if(gameObject.name == "Spider")
+        {
+            FindObjectOfType<AudioManager>().Stop("BossBattle");
+        }
     }
 }
