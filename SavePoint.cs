@@ -1,5 +1,4 @@
-﻿using System.IO;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,11 +6,11 @@ public class SavePoint : MonoBehaviour
 {
     public TextMeshProUGUI hint;
     bool isAllowedToSave;
-    SaveInformation saveInfo;
+    SaveManager saveManager;
     public GameObject player;
     public GameObject spider;
 
-    private bool activatedFirst;
+    bool activatedFirst;
 
     public int orderNumber;
 
@@ -19,29 +18,23 @@ public class SavePoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        saveInfo = SaveInformation.getInstance();
-        if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
-        {
-            SaveInformation.ReadInfoFromFile();
-            saveInfo = SaveInformation.getInstance();
-        }
-        activatedFirst = saveInfo.screens[orderNumber - 1];
+        saveManager = FindObjectOfType<SaveManager>();
+        activatedFirst = saveManager.saveInfo.screens[orderNumber - 1];
     }
+
     // Update is called once per frame
     void Update()
     {
         if(isAllowedToSave && Input.GetKeyDown(KeyCode.E))
         {
-            saveInfo.playerPosition = new float[] { player.transform.position.x, player.transform.position.y, player.transform.position.z };
-            saveInfo.PlayerHealth = player.GetComponent<Player>().health;
-            saveInfo.SpiderHealth = spider.GetComponent<Enemy>().health;
-            saveInfo.FrogsKilled = GameObject.FindGameObjectsWithTag("Frog").Length == 0;
+            saveManager.saveInfo.playerPosition = new float[] { player.transform.position.x, player.transform.position.y, player.transform.position.z };
             if(!activatedFirst)
             {
-                saveInfo.screens[orderNumber - 1] = true;
+                saveManager.saveInfo.screens[orderNumber - 1] = true;
             }
-            Debug.Log("respawn" + saveInfo.SpiderHealth);
-            SaveInformation.SaveInfoToFile(saveInfo);
+
+            saveManager.SaveInfoToFile();
+
             if(!activatedFirst)
             {
                 SceneManager.LoadScene("LoadScreen " + orderNumber);
@@ -52,8 +45,6 @@ public class SavePoint : MonoBehaviour
             }
         }
     }
-
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

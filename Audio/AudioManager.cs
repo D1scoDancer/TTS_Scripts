@@ -1,13 +1,12 @@
 ﻿using System;
 using UnityEngine;
-using System.IO;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
     public static AudioManager instance;
 
-    private SaveInformation saveInfo;
+    private SaveManager saveManager;
 
     private void Awake()
     {
@@ -46,18 +45,13 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        saveInfo = SaveInformation.getInstance();
-        if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
-        {
-            SaveInformation.ReadInfoFromFile();
-            saveInfo = SaveInformation.getInstance();
-        }
-
-        if(saveInfo.dialogNumber == 0)
+        saveManager = FindObjectOfType<SaveManager>();
+       
+        if(saveManager.saveInfo.dialogNumber == 0)
         {
             Play("MainTheme");
         }
-        else if(saveInfo.dialogNumber == 1)
+        else if(saveManager.saveInfo.dialogNumber == 1)
         {
             Stop("BossBattle");
             Play("MainTheme");

@@ -10,26 +10,23 @@ public class DialogueDisplay : MonoBehaviour
     public GameObject speakerLeft;
     public GameObject speakerRight;
 
-    private SpeakerUI speakerUILeft;
-    private SpeakerUI speakerUIRight;
+    SpeakerUI speakerUILeft;
+    SpeakerUI speakerUIRight;
 
-    private int activeLineIndex = 0;
+    int activeLineIndex = 0;
 
     public DialogueActivator activator;
 
-    SaveInformation saveInfo;
+    SaveManager saveManager;
 
     private void Start()
     {
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
-            SaveInformation.ReadInfoFromFile();
-            saveInfo = SaveInformation.getInstance();
-            Debug.Log(saveInfo.SpiderHealth);
+            saveManager = FindObjectOfType<SaveManager>();
         }
-        saveInfo = SaveInformation.getInstance();
 
-        conversation = plot.plot[saveInfo.dialogNumber];
+        conversation = plot.plot[saveManager.saveInfo.dialogNumber];
 
         speakerUILeft = speakerLeft.GetComponent<SpeakerUI>();
         speakerUIRight = speakerRight.GetComponent<SpeakerUI>();
@@ -37,10 +34,8 @@ public class DialogueDisplay : MonoBehaviour
         speakerUILeft.Speaker = conversation.speakerLeft;
         speakerUIRight.Speaker = conversation.speakerRight;
 
-        saveInfo.dialogNumber++;
+        saveManager.saveInfo.dialogNumber++;
         AdvanceConversation();
-
-
     }
 
     private void Update()
@@ -65,7 +60,7 @@ public class DialogueDisplay : MonoBehaviour
             activeLineIndex = 0;
             activator.StartFight();
             this.enabled = false;
-            if(saveInfo.dialogNumber <= 2)
+            if(saveManager.saveInfo.dialogNumber <= 2)
             {
                 FindObjectOfType<AudioManager>().Stop("MainTheme");
                 FindObjectOfType<AudioManager>().Play("BossBattle");

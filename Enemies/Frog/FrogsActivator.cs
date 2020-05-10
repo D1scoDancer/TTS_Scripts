@@ -3,33 +3,29 @@ using UnityEngine;
 
 public class FrogsActivator : MonoBehaviour
 {
-    SaveInformation saveInfo;
+    SaveManager saveManager;
     private void Start()
     {
-        saveInfo = SaveInformation.getInstance();
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
-            SaveInformation.ReadInfoFromFile();
-            saveInfo = SaveInformation.getInstance();
-            Debug.Log(saveInfo.SpiderHealth);
-            if(saveInfo.FrogsKilled)
+            saveManager = FindObjectOfType<SaveManager>();
+            if(saveManager.saveInfo.FrogsKilled)
             {
                 Destroy(gameObject);
             }
             else
             {
-                foreach(Transform frog in transform)
-                {
-                    if(frog.name.Contains("Frog"))
-                    {
-                        frog.GetComponent<FrogController>().enabled = true;
-                    }
-                }
+                ActivateFrogs();
             }
         }
-       
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
+    {
+        ActivateFrogs();
+    }
+
+    private void ActivateFrogs()
     {
         foreach(Transform frog in transform)
         {

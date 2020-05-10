@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour, IKillable
 
     public GameObject deathEffect;
 
-    SaveInformation saveInfo;
+    SaveManager saveManager;
 
     private void Start()
     {
@@ -15,12 +15,9 @@ public class Enemy : MonoBehaviour, IKillable
         {
             if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
             {
-                SaveInformation.ReadInfoFromFile();
-                saveInfo = SaveInformation.getInstance();
-                Debug.Log(saveInfo.SpiderHealth);
+                saveManager = FindObjectOfType<SaveManager>();
+                health = saveManager.saveInfo.SpiderHealth;
             }
-            saveInfo = SaveInformation.getInstance();
-
         }
     }
 
@@ -31,12 +28,6 @@ public class Enemy : MonoBehaviour, IKillable
         {
             Die();
         }
-
-        if(gameObject.name == "Spider")
-        {
-            Debug.Log(health);
-        }
-
     }
 
     public void Die()

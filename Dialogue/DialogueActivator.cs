@@ -2,7 +2,7 @@
 
 public class DialogueActivator : MonoBehaviour
 {
-    SaveInformation saveInfo;
+    SaveManager saveManager;
     public GameObject dialogue;
     public PlayerController playerController;
     public SpiderFighter spiderFighter;
@@ -25,7 +25,7 @@ public class DialogueActivator : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!called && saveInfo.dialogNumber < 2)
+        if(!called && saveManager.saveInfo.dialogNumber < 2)
         {
             called = true;
             playerController.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -36,8 +36,8 @@ public class DialogueActivator : MonoBehaviour
 
     private void Start()
     {
-        saveInfo = SaveInformation.getInstance();
-        if(saveInfo.dialogNumber >= 2)
+        saveManager = FindObjectOfType<SaveManager>();
+        if(saveManager.saveInfo.dialogNumber >= 2)
         {
             spiderFighter.gameObject.GetComponent<SpiderWaiter>().enabled = true;
             dissableWeapon.SetActive(false);

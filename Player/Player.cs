@@ -8,29 +8,21 @@ public class Player : MonoBehaviour, IKillable
     public GameObject deathEffect;
 
     public int health;
-    bool hit;
+    private bool hit;
 
-    SpriteRenderer spriteRenderer;
-    PlayerController playerController;
-    Rigidbody2D rigidbody2D;
-    BoxCollider2D collider2D;
-    Animator animator;
-    BetterJump betterJump;
-    Weapon weapon;
-    SaveInformation saveInfo;
+    private SpriteRenderer spriteRenderer;
+    private PlayerController playerController;
+    private Rigidbody2D rigidbody2D;
+    private BoxCollider2D collider2D;
+    private Animator animator;
+    private BetterJump betterJump;
+    private Weapon weapon;
 
-    private void Awake()
-    {
-        if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
-        {
-            SaveInformation.ReadInfoFromFile();
-            saveInfo = SaveInformation.getInstance();
-        }
+    private SaveManager saveManager;
 
-    }
+
     private void Start()
     {
-        saveInfo = SaveInformation.getInstance();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerController = GetComponent<PlayerController>();
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -41,16 +33,13 @@ public class Player : MonoBehaviour, IKillable
 
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
-            SaveInformation.ReadInfoFromFile();
-            saveInfo = SaveInformation.getInstance();
-
-            transform.position = new Vector3(saveInfo.playerPosition[0] + 10, saveInfo.playerPosition[1], saveInfo.playerPosition[2]);
-            health = saveInfo.PlayerHealth;
+            saveManager = FindObjectOfType<SaveManager>();
+            transform.position = new Vector3(saveManager.saveInfo.playerPosition[0] + 10, saveManager.saveInfo.playerPosition[1], saveManager.saveInfo.playerPosition[2]);
         }
     }
+
     public void Die()
     {
-        Debug.Log(GameObject.Find("Spider").GetComponent<Enemy>().health + "!!!");
         health = 0;
         FindObjectOfType<AudioManager>().Play("Death");
         Instantiate(deathEffect, transform.position, Quaternion.identity);
@@ -62,13 +51,12 @@ public class Player : MonoBehaviour, IKillable
     {
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
-            Debug.Log("respawn" + saveInfo.SpiderHealth);
-            SaveInformation.SaveInfoToFile(saveInfo);
+            saveManager.saveInfo.SpiderHealth = FindObjectOfType<SpiderController>().gameObject.GetComponent<Enemy>().health;
+            saveManager.SaveInfoToFile();
         }
         yield return new WaitForSeconds(4);
 
-        saveInfo = SaveInformation.getInstance();
-        if(saveInfo.dialogNumber == 1)
+        if(saveManager.saveInfo.dialogNumber == 1)
         {
             FindObjectOfType<AudioManager>().Stop("BossBattle");
             FindObjectOfType<AudioManager>().Play("MainTheme");
@@ -88,7 +76,6 @@ public class Player : MonoBehaviour, IKillable
         betterJump.enabled = false;
         weapon.enabled = false;
     }
-
 
     private void Update()
     {

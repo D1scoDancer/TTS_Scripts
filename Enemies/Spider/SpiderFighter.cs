@@ -5,7 +5,7 @@
 /// </summary>
 public class SpiderFighter : MonoBehaviour
 {
-    static System.Random rand = new System.Random();
+    private static Random rand = new Random();
     private Rigidbody2D spiderRigidbody2D;
     private Animator spiderAnimator;
     private SpiderController spiderController;
@@ -24,11 +24,10 @@ public class SpiderFighter : MonoBehaviour
     public Transform firePointExtra2;
     public GameObject bulletPrefab;
     public float fireRate;
-    float nextFire;
+    private float nextFire;
 
     public bool shoot;
     public bool attack;
-
 
     void Start()
     {
@@ -106,6 +105,7 @@ public class SpiderFighter : MonoBehaviour
             Instantiate(bulletPrefab, firePointExtra2.position, firePointExtra2.rotation);
         }
     }
+
     private bool CheckIfTimeToFire()
     {
         if(Time.time > nextFire)
@@ -137,4 +137,3 @@ public class SpiderFighter : MonoBehaviour
         shoot = false;
     }
 }
-

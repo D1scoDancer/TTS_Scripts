@@ -6,13 +6,14 @@ public class SpiderWaiter : MonoBehaviour
     public SpiderFighter spiderFighter;
     public GameObject player;
     Enemy enemy;
-    SaveInformation saveInfo;
+    SaveManager saveManager;
 
     void Start()
     {
-        saveInfo = SaveInformation.getInstance();
+        saveManager = FindObjectOfType<SaveManager>();
         enemy = GetComponent<Enemy>();
-        enemy.health = saveInfo.SpiderHealth;
+
+        enemy.health = saveManager.saveInfo.SpiderHealth;
         transform.position = new Vector3(3788f, 231.5f, 10f);
     }
 
