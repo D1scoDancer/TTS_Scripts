@@ -6,7 +6,10 @@ public class MainMenu : MonoBehaviour
 {
     public void Continue()
     {
-        SceneManager.LoadScene("Level-01-Cave");
+        if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
+        {
+            SceneManager.LoadScene("Level-01-Cave");
+        }
     }
 
     public void NewGame()
