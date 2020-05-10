@@ -9,13 +9,9 @@ public class FrogsActivator : MonoBehaviour
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
             saveManager = FindObjectOfType<SaveManager>();
-            if(saveManager.saveInfo.FrogsKilled)
+            if(saveManager.saveInfo.FrogsKilled || saveManager.saveInfo.screens[0])
             {
                 Destroy(gameObject);
-            }
-            else
-            {
-                ActivateFrogs();
             }
         }
     }
