@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour, IKillable
     public int health;
 
     public GameObject deathEffect;
+    public GameObject deadSpider;
 
     SaveManager saveManager;
 
@@ -24,6 +25,10 @@ public class Enemy : MonoBehaviour, IKillable
     public void TakeDamage(int damage)
     {
         health -= damage;
+        if(health <= 20 && FindObjectOfType<Player>().health <= 15)
+        {
+            health += 40;
+        }
         if(health <= 0)
         {
             Die();
@@ -32,11 +37,14 @@ public class Enemy : MonoBehaviour, IKillable
 
     public void Die()
     {
-        Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
         if(gameObject.name == "Spider")
         {
+            Instantiate(deadSpider, transform.position, Quaternion.identity);
             FindObjectOfType<AudioManager>().Stop("BossBattle");
+            Destroy(gameObject);
+            return;
         }
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

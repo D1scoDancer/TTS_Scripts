@@ -57,8 +57,8 @@ public class SpiderFighter : MonoBehaviour
         attack = true;
         if(collision.gameObject.layer == 11)
         {
-            collision.transform.GetComponent<Player>().TakeDamage(collideDamage);
-            collision.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 100));
+            collision.gameObject.GetComponent<Player>().TakeDamage(collideDamage);
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 100));
         }
     }
 

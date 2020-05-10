@@ -17,6 +17,15 @@ public class DialogueActivator : MonoBehaviour
 
     public void StartFight()
     {
+        if(GameObject.Find("Spider") == null)
+        {
+            playerController.gameObject.GetComponent<Weapon>().enabled = true;
+            playerController.enabled = true;
+            this.enabled = false;
+            FindObjectOfType<SpiderDeadBody>().gameObject.GetComponent<BoxCollider2D>().enabled = true;
+            return;
+        }
+
         playerController.gameObject.GetComponent<Weapon>().enabled = true;
         playerController.enabled = true;
         spiderFighter.enabled = true;

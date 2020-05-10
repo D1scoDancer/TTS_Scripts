@@ -6,7 +6,7 @@ public class DialogueDisplay : MonoBehaviour
 {
     public Plot plot;
     public Conversation conversation;
-
+    public Conversation finalMonologue;
     public GameObject speakerLeft;
     public GameObject speakerRight;
 
@@ -21,6 +21,19 @@ public class DialogueDisplay : MonoBehaviour
 
     private void Start()
     {
+        if(GameObject.Find("Spider") == null)
+        {
+            conversation = finalMonologue;
+
+            speakerUILeft = speakerLeft.GetComponent<SpeakerUI>();
+            speakerUIRight = speakerRight.GetComponent<SpeakerUI>();
+
+            speakerUILeft.Speaker = conversation.speakerLeft;
+            speakerUIRight.Speaker = conversation.speakerRight;
+            AdvanceConversation();
+            return;
+        }
+
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
             saveManager = FindObjectOfType<SaveManager>();
@@ -60,7 +73,7 @@ public class DialogueDisplay : MonoBehaviour
             activeLineIndex = 0;
             activator.StartFight();
             this.enabled = false;
-            if(saveManager.saveInfo.dialogNumber <= 2)
+            if(GameObject.Find("Spider") != null && saveManager.saveInfo.dialogNumber <= 2)
             {
                 FindObjectOfType<AudioManager>().Stop("MainTheme");
                 FindObjectOfType<AudioManager>().Play("BossBattle");
