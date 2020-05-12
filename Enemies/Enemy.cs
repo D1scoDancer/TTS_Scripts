@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.IO;
 
+/// <summary>
+/// Класс описывающий врага
+/// </summary>
 public class Enemy : MonoBehaviour, IKillable
 {
     public int health;
@@ -10,7 +13,7 @@ public class Enemy : MonoBehaviour, IKillable
 
     SaveManager saveManager;
 
-    private void Start()
+    void Start()
     {
         if(gameObject.name == "Spider")
         {
@@ -22,6 +25,10 @@ public class Enemy : MonoBehaviour, IKillable
         }
     }
 
+    /// <summary>
+    /// Получить урон
+    /// </summary>
+    /// <param name="damage">урон</param>
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -35,6 +42,9 @@ public class Enemy : MonoBehaviour, IKillable
         }
     }
 
+    /// <summary>
+    /// Умереть
+    /// </summary>
     public void Die()
     {
         if(gameObject.name == "Spider")

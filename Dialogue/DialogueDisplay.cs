@@ -2,6 +2,9 @@
 using System.IO;
 using UnityEngine;
 
+/// <summary>
+/// Класс отвечающий за работу диалогов
+/// </summary>
 public class DialogueDisplay : MonoBehaviour
 {
     public Plot plot;
@@ -19,7 +22,7 @@ public class DialogueDisplay : MonoBehaviour
 
     SaveManager saveManager;
 
-    private void Start()
+    void Start()
     {
         if(GameObject.Find("Spider") == null)
         {
@@ -51,7 +54,7 @@ public class DialogueDisplay : MonoBehaviour
         AdvanceConversation();
     }
 
-    private void Update()
+    void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
@@ -59,6 +62,9 @@ public class DialogueDisplay : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Продолжать диалог (по очереди сменять говорящих)
+    /// </summary>
     public void AdvanceConversation()
     {
         if(activeLineIndex < conversation.lines.Length)
@@ -81,7 +87,10 @@ public class DialogueDisplay : MonoBehaviour
         }
     }
 
-    private void DisplayLine()
+    /// <summary>
+    /// Определить говорящего
+    /// </summary>
+    void DisplayLine()
     {
         Line line = conversation.lines[activeLineIndex];
         Character character = line.character;
@@ -96,7 +105,13 @@ public class DialogueDisplay : MonoBehaviour
         }
     }
 
-    private void SetDialogue(SpeakerUI activeSpeakerUI, SpeakerUI inactiveSpeakerUI, string text)
+    /// <summary>
+    /// Отобразить UI говорящего, скрыть UI другого
+    /// </summary>
+    /// <param name="activeSpeakerUI">говорящий</param>
+    /// <param name="inactiveSpeakerUI">слушающий</param>
+    /// <param name="text">реплика говорящего</param>
+    void SetDialogue(SpeakerUI activeSpeakerUI, SpeakerUI inactiveSpeakerUI, string text)
     {
         inactiveSpeakerUI.Hide();
         activeSpeakerUI.Show();
@@ -104,7 +119,13 @@ public class DialogueDisplay : MonoBehaviour
         StartCoroutine(TypeSentence(activeSpeakerUI, text));
     }
 
-    private IEnumerator TypeSentence(SpeakerUI activeSpeakerUI, string text)
+    /// <summary>
+    /// Вывод строки по буквам с задержкой
+    /// </summary>
+    /// <param name="activeSpeakerUI">говорящий</param>
+    /// <param name="text">реплика говорящего</param>
+    /// <returns>буквы с задержкой в 3 кадра</returns>
+    IEnumerator TypeSentence(SpeakerUI activeSpeakerUI, string text)
     {
         activeSpeakerUI.Dialog = "";
         foreach(char letter in text.ToCharArray())

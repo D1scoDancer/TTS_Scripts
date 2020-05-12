@@ -2,13 +2,22 @@
 using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
+    /// <summary>
+    /// Масссив всех мелодий игры
+    /// </summary>
     public Sound[] sounds;
 
+    /// <summary>
+    /// Экземпляр класса AudioManager (паттерн Одиночка)
+    /// </summary>
     public static AudioManager instance;
 
-    private SaveManager saveManager;
+    /// <summary>
+    /// Объект сохраняемой информации
+    /// </summary>
+    SaveManager saveManager;
 
-    private void Awake()
+    void Awake()
     {
         if(instance == null)
         {
@@ -33,20 +42,10 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Play(string name)
-    {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        if(s == null)
-        {
-            return;
-        }
-        s.source.Play();
-    }
-
-    private void Start()
+    void Start()
     {
         saveManager = FindObjectOfType<SaveManager>();
-       
+
         if(saveManager.saveInfo.dialogNumber == 0)
         {
             Play("MainTheme");
@@ -63,6 +62,24 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Воспроизвести мелодию
+    /// </summary>
+    /// <param name="name">Имя мелодии</param>
+    public void Play(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if(s == null)
+        {
+            return;
+        }
+        s.source.Play();
+    }
+
+    /// <summary>
+    /// Остановить мелодию
+    /// </summary>
+    /// <param name="name">Имя мелодии</param>
     public void Stop(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);

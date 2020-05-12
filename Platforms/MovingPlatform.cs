@@ -1,28 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Класс представвляющий собой движущуюся платформу
+/// </summary>
 public class MovingPlatform : MonoBehaviour
 {
 
     [SerializeField]
-    private float speed;
+    float speed;
 
     [SerializeField]
-    private bool activatedByPlayer;
+    bool activatedByPlayer;
 
     [SerializeField]
-    private bool movingRight;
+    bool movingRight;
 
     [SerializeField]
-    private float xDirection;
+    float xDirection;
 
     [SerializeField]
-    private float yDirection;
+    float yDirection;
 
-    private bool stop;
+    bool stop;
 
-    private void Update()
+    void Update()
     {
         if(!stop)
         {
@@ -39,10 +40,33 @@ public class MovingPlatform : MonoBehaviour
                 Move();
             }
         }
-       
     }
 
-    private void Move()
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Turn"))
+        {
+            movingRight = !movingRight;
+        }
+        if(collision.gameObject.CompareTag("Stop"))
+        {
+            stop = true;
+        }
+        if(collision.gameObject.CompareTag("Rotate"))
+        {
+            stop = true;
+            if(transform.Find("Player"))
+            {
+                transform.Find("Player").parent = null;
+            }
+            transform.Rotate(0, 0, -90);
+        }
+    }
+
+    /// <summary>
+    /// Начать движение
+    /// </summary>
+    void Move()
     {
         if(movingRight)
         {
@@ -53,27 +77,6 @@ public class MovingPlatform : MonoBehaviour
         {
             transform.Translate(-Time.deltaTime * speed * xDirection,
                 -Time.deltaTime * speed * yDirection, 0);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.CompareTag("Turn"))
-        {
-            movingRight = !movingRight;
-        }
-        if(collision.gameObject.CompareTag("Stop"))
-        {
-            stop = true;   
-        }
-        if(collision.gameObject.CompareTag("Rotate"))
-        {
-            stop = true;
-            if(transform.Find("Player"))
-            {
-                transform.Find("Player").parent = null;
-            }
-            transform.Rotate(0, 0, -90);
         }
     }
 }

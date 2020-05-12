@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Класс отвечающий за активацию ловушки "Колесо"
+/// </summary>
 public class WheelActivator : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.name == "Player")
         {

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
-
+/// <summary>
+/// Класс отвечающий за начало боя при выполнении определенных условий
+/// </summary>
 public class SpiderWaiter : MonoBehaviour
 {
     public SpiderFighter spiderFighter;
@@ -17,7 +19,6 @@ public class SpiderWaiter : MonoBehaviour
         transform.position = new Vector3(3788f, 231.5f, 10f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(Mathf.Abs(player.transform.position.x - transform.position.x) < 200)

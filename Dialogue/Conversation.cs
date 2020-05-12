@@ -1,6 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
+/// <summary>
+/// Класс описывающий диалог между 2мя персонажами. Объект для хранения информации
+/// </summary>
 [CreateAssetMenu(fileName = "New Conversation", menuName = "Conversation")]
 public class Conversation : ScriptableObject
 {
@@ -9,6 +12,9 @@ public class Conversation : ScriptableObject
     public Line[] lines;
 }
 
+/// <summary>
+/// Структура описывающая реплики персонажа
+/// </summary>
 [Serializable]
 public struct Line
 {

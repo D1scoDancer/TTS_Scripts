@@ -1,21 +1,14 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Класс представляющий одну из ловушек "Тунель смерти"
+/// </summary>
 public class DeathTunnel : MonoBehaviour
 {
-
     public float speed;
-
     public bool trap;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.name == "Player")
-        {
-            trap = true;
-        }
-    }
-
-    private void Update()
+    void Update()
     {
         if(trap)
         {
@@ -23,4 +16,11 @@ public class DeathTunnel : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.name == "Player")
+        {
+            trap = true;
+        }
+    }
 }

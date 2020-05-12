@@ -1,6 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
+/// <summary>
+/// Класс описывающий одну мелодию
+/// </summary>
 [Serializable]
 public class Sound
 {

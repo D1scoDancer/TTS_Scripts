@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Класс описывающий пулю паука
+/// </summary>
 public class SpiderBullet : MonoBehaviour
 {
     public float speed = 60f;
@@ -12,7 +15,7 @@ public class SpiderBullet : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = transform.right * speed;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         Player player = collision.GetComponent<Player>();
         player?.TakeDamage(damage);

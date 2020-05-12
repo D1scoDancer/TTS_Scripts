@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Класс описывающий UI участников диалога
+/// </summary>
 public class SpeakerUI : MonoBehaviour
 {
     public Image portrait;
     public Text fullName;
     public Text dialog;
 
-    private Character speaker;
+    Character speaker;
 
     public Character Speaker
     {
@@ -26,21 +29,27 @@ public class SpeakerUI : MonoBehaviour
         get => dialog.text;
     }
 
-    public bool HasSpeaker()
-    {
-        return speaker != null;
-    }
-
+    /// <summary>
+    /// Проверка на говорящего
+    /// </summary>
+    /// <param name="character"></param>
+    /// <returns>результат проверки</returns>
     public bool SpeakerIs(Character character)
     {
         return speaker == character;
     }
 
+    /// <summary>
+    /// Спрятать UI
+    /// </summary>
     public void Hide()
     {
         gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Показать UI
+    /// </summary>
     public void Show()
     {
         gameObject.SetActive(true);

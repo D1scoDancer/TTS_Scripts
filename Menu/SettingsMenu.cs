@@ -1,9 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UI;
-using TMPro;
+
+/// <summary>
+/// Класс отвечающий за работу меню настроек
+/// </summary>
 public class SettingsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
@@ -12,7 +14,7 @@ public class SettingsMenu : MonoBehaviour
 
     public TMP_Dropdown resolutionDropdown;
 
-    private void Start()
+    void Start()
     {
         resolutions = Screen.resolutions;
 
@@ -37,21 +39,37 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
     }
 
+    /// <summary>
+    /// Задать громкость
+    /// </summary>
+    /// <param name="volume"></param>
     public void SetVolume(float volume)
     {
         audioMixer.SetFloat("volume", volume);
     }
 
+    /// <summary>
+    /// Задать качество
+    /// </summary>
+    /// <param name="qualityIndex"></param>
     public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
     }
 
+    /// <summary>
+    /// Задать полноэкранный режим
+    /// </summary>
+    /// <param name="isFullScreen"></param>
     public void SetFullScreen(bool isFullScreen)
     {
         Screen.fullScreen = isFullScreen;
     }
-
+    
+    /// <summary>
+    /// Задать расрешение экрана
+    /// </summary>
+    /// <param name="resolutionIndex"></param>
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];

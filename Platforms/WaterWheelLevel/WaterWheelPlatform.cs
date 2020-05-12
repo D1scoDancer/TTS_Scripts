@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Класс отвечающий за работу ловушки "Колесо"
+/// </summary>
 public class WaterWheelPlatform : MonoBehaviour
 {
     [SerializeField]
-    private float speed;
+    float speed;
 
     public bool activatedByPlayer;
 
@@ -13,11 +14,11 @@ public class WaterWheelPlatform : MonoBehaviour
 
     [SerializeField]
     [Range(-1, 1)]
-    private int xMultiplier;
+    int xMultiplier;
 
     [SerializeField]
     [Range(-1, 1)]
-    private int yMultiplier;
+    int yMultiplier;
 
     void Update()
     {
@@ -35,21 +36,7 @@ public class WaterWheelPlatform : MonoBehaviour
         }
     }
 
-    private void StartWheel()
-    {
-        if(movingRight)
-        {
-            transform.Translate(Time.deltaTime * speed * xMultiplier,
-                Time.deltaTime * speed * yMultiplier, 0);
-        }
-        else
-        {
-            transform.Translate(Time.deltaTime * speed * xMultiplier,
-                Time.deltaTime * speed * yMultiplier, 0);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("WheelCommand") && collision.transform.parent == transform.parent)
         {
@@ -89,6 +76,23 @@ public class WaterWheelPlatform : MonoBehaviour
                         break;
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// Начать движение "Колеса"
+    /// </summary>
+    void StartWheel()
+    {
+        if(movingRight)
+        {
+            transform.Translate(Time.deltaTime * speed * xMultiplier,
+                Time.deltaTime * speed * yMultiplier, 0);
+        }
+        else
+        {
+            transform.Translate(Time.deltaTime * speed * xMultiplier,
+                Time.deltaTime * speed * yMultiplier, 0);
         }
     }
 }

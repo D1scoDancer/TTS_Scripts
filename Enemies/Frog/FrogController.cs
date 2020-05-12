@@ -1,28 +1,31 @@
 ﻿using System;
 using UnityEngine;
 
+/// <summary>
+/// Класс описывающий поведение лягушки
+/// </summary>
 public class FrogController : MonoBehaviour
 {
-    private Animator myAnimator;
+    Animator myAnimator;
 
     [SerializeField]
-    private float speed;
+    float speed;
 
     [SerializeField]
-    private float sittingDuration;
+    float sittingDuration;
 
-    private bool movingRight;
-    private bool moving;
+    bool movingRight;
+    bool moving;
 
-    private DateTime freezeTime;
+    DateTime freezeTime;
 
-    private void Start()
+    void Start()
     {
         myAnimator = GetComponent<Animator>();
         moving = myAnimator.GetBool("moving");
     }
 
-    private void Update()
+    void Update()
     {
         if(movingRight && moving)
         {
@@ -41,7 +44,7 @@ public class FrogController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.layer == 4)
         {
@@ -55,5 +58,4 @@ public class FrogController : MonoBehaviour
         myAnimator.SetBool("moving", moving);
         freezeTime = DateTime.Now;
     }
-
 }

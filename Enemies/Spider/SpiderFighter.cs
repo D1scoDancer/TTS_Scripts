@@ -1,22 +1,22 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Боевка Spider
+/// Класс описывающий боевку паука
 /// </summary>
 public class SpiderFighter : MonoBehaviour
 {
-    private static Random rand = new Random();
-    private Rigidbody2D spiderRigidbody2D;
-    private Animator spiderAnimator;
-    private SpiderController spiderController;
+    static Random rand = new Random();
+    Rigidbody2D spiderRigidbody2D;
+    Animator spiderAnimator;
+    SpiderController spiderController;
 
     [SerializeField]
-    private Player player;  // чтобы отслеживать положение противника
+    Player player;  // чтобы отслеживать положение противника
 
     public bool facingRight;
     public float speed;
     public int collideDamage;
-    private float distance;
+    float distance;
 
     // стрельба
     public Transform firePoint;
@@ -24,7 +24,7 @@ public class SpiderFighter : MonoBehaviour
     public Transform firePointExtra2;
     public GameObject bulletPrefab;
     public float fireRate;
-    private float nextFire;
+    float nextFire;
 
     public bool shoot;
     public bool attack;
@@ -52,7 +52,7 @@ public class SpiderFighter : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         attack = true;
         if(collision.gameObject.layer == 11)
@@ -63,9 +63,9 @@ public class SpiderFighter : MonoBehaviour
     }
 
     /// <summary>
-    /// Всегда смотрит в сторону игрока
+    /// Смотреть в сторону игрока
     /// </summary>
-    private void LookAtPlayer()
+    void LookAtPlayer()
     {
         if(distance > 10 && !facingRight)
         {
@@ -78,7 +78,7 @@ public class SpiderFighter : MonoBehaviour
     }
 
     /// <summary>
-    /// Разворот
+    /// Развернуться
     /// </summary>
     public void Flip()
     {
@@ -86,7 +86,10 @@ public class SpiderFighter : MonoBehaviour
         transform.Rotate(0, 180, 0);
     }
 
-    private void Shoot1()
+    /// <summary>
+    /// Выстрелить способом 1
+    /// </summary>
+    void Shoot1()
     {
         if(CheckIfTimeToFire())
         {
@@ -95,7 +98,10 @@ public class SpiderFighter : MonoBehaviour
         }
     }
 
-    private void Shoot2()
+    /// <summary>
+    /// Выстрелить способом 2
+    /// </summary>
+    void Shoot2()
     {
         if(CheckIfTimeToFire())
         {
@@ -106,7 +112,11 @@ public class SpiderFighter : MonoBehaviour
         }
     }
 
-    private bool CheckIfTimeToFire()
+    /// <summary>
+    /// Проверка можно ли стрелять (зависит от времени)
+    /// </summary>
+    /// <returns></returns>
+    bool CheckIfTimeToFire()
     {
         if(Time.time > nextFire)
         {
@@ -119,7 +129,10 @@ public class SpiderFighter : MonoBehaviour
         }
     }
 
-    private void Fight()
+    /// <summary>
+    /// Начать бой
+    /// </summary>
+    void Fight()
     {
         if(Mathf.Abs(distance) < 20)
         {
@@ -131,7 +144,10 @@ public class SpiderFighter : MonoBehaviour
         }
     }
 
-    private void ResetValues()
+    /// <summary>
+    /// Сбросить значения переменных
+    /// </summary>
+    void ResetValues()
     {
         attack = false;
         shoot = false;

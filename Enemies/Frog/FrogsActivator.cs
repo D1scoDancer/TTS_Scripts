@@ -1,10 +1,13 @@
 ﻿using System.IO;
 using UnityEngine;
 
+/// <summary>
+/// Класс активирующий лягушек
+/// </summary>
 public class FrogsActivator : MonoBehaviour
 {
     SaveManager saveManager;
-    private void Start()
+    void Start()
     {
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
@@ -16,12 +19,15 @@ public class FrogsActivator : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         ActivateFrogs();
     }
 
-    private void ActivateFrogs()
+    /// <summary>
+    /// Активация лягушек
+    /// </summary>
+    void ActivateFrogs()
     {
         foreach(Transform frog in transform)
         {

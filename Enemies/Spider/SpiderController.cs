@@ -1,22 +1,20 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Смена анимаций в SpiderController
+/// Класс описывающий смену анимаций паука
 /// </summary>
 public class SpiderController : MonoBehaviour
 {
-    private Rigidbody2D spiderRigidbody2D;
-    private Animator spiderAnimator;
-    private SpiderFighter spiderFighter;
+    Rigidbody2D spiderRigidbody2D;
+    Animator spiderAnimator;
 
-    private void Start()
+    void Start()
     {
         spiderRigidbody2D = GetComponent<Rigidbody2D>();
         spiderAnimator = GetComponent<Animator>();
-        spiderFighter = GetComponent<SpiderFighter>();
     }
 
-    private void Update()
+    void Update()
     {
         spiderAnimator.SetFloat("speed", Mathf.Abs(spiderRigidbody2D.velocity.x));
     }
