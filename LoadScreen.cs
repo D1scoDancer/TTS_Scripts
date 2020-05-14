@@ -2,6 +2,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Класс загружающий экран загрузки
+/// </summary>
 public class LoadScreen : MonoBehaviour
 {
     public float time;
@@ -11,6 +14,10 @@ public class LoadScreen : MonoBehaviour
         StartCoroutine(Wait());
     }
 
+    /// <summary>
+    /// Ожидание перед загрузкой игры
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Wait()
     {
         yield return new WaitForSeconds(time);

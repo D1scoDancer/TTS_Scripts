@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Класс для более плавного прыжка
+/// </summary>
 public class BetterJump : MonoBehaviour
 {
     public float fallMultiplier = 2.5f;

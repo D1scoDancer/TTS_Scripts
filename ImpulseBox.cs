@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Класс представляющий платформу придающую вектор силы к игроку
+/// </summary>
 public class ImpulseBox : MonoBehaviour
 {
     public float forceY;

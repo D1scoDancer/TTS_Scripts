@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Класс, позволяющий игроку стрелять
+/// </summary>
 public class Weapon : MonoBehaviour
 {
     public Transform firePoint;
@@ -12,7 +15,7 @@ public class Weapon : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    // Update is called once per frame
+
     private void Update()
     {
         if(Input.GetMouseButtonDown(0) && spriteRenderer.color.b > 0.5)
@@ -22,6 +25,10 @@ public class Weapon : MonoBehaviour
         } 
     }
 
+    /// <summary>
+    /// Возврат обычного цвета
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ReturnColor()
     {
         yield return new WaitForSeconds(1.5f);

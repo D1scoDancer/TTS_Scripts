@@ -1,5 +1,8 @@
 ﻿using System;
 using UnityEngine;
+/// <summary>
+/// Класс отвечающий за воспроизведение всех звуков игры
+/// </summary>
 public class AudioManager : MonoBehaviour
 {
     /// <summary>

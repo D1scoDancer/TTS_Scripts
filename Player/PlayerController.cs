@@ -1,6 +1,9 @@
 ﻿using Cinemachine;
 using UnityEngine;
 
+/// <summary>
+/// Класс контролирующий передвижение игрока и смену анимаций игрока
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D myRigidbody2D;
@@ -35,10 +38,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private bool airControl;
 
-
-    /// <summary>
-    /// Начинает работу в начале сцены
-    /// </summary>
     private void Start()
     {
         cmYStandart = cameraCM.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenY;
@@ -47,17 +46,11 @@ public class PlayerController : MonoBehaviour
         myAnimator = GetComponent<Animator>();
     }
 
-    /// <summary>
-    /// Обновляется каждый кадр
-    /// </summary>
     private void Update()
     {
         HandleInput();
     }
 
-    /// <summary>
-    /// Обновляется каждую единицу времени
-    /// </summary>
     private void FixedUpdate()
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -70,6 +63,22 @@ public class PlayerController : MonoBehaviour
         Flip(horizontal);
         HandleLayers();
         ResetValues();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.name.Contains("Platform"))
+        {
+            this.transform.parent = collision.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.gameObject.name.Contains("MovingPlatform"))
+        {
+            this.transform.parent = null;
+        }
     }
 
     /// <summary>
@@ -97,7 +106,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Ввод
+    /// Обработка взодныз данных
     /// </summary>
     private void HandleInput()
     {
@@ -115,6 +124,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Работа с камерой
+    /// </summary>
     private void HandleCamera()
     {
         var setting = cameraCM.GetComponent<CinemachineVirtualCamera>();
@@ -176,6 +188,9 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Смена слоев анимации
+    /// </summary>
     private void HandleLayers()
     {
         if(!isGrounded)
@@ -195,26 +210,5 @@ public class PlayerController : MonoBehaviour
     {
         jump = false;
         cameraDown = false;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.name.Contains("Platform"))
-        {
-            this.transform.parent = collision.transform;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if(collision.gameObject.name.Contains("MovingPlatform"))
-        {
-            this.transform.parent = null;
-        }
-    }
-
-    public float GetXPosition()
-    {
-        return myRigidbody2D.position.x;
     }
 }

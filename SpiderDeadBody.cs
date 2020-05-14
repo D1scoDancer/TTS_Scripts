@@ -1,7 +1,9 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Класс представляющий функционал трупа паука
+/// </summary>
 public class SpiderDeadBody : MonoBehaviour
 {
     public EndingZone endingZone;
@@ -13,6 +15,14 @@ public class SpiderDeadBody : MonoBehaviour
         endingZone = FindObjectOfType<EndingZone>();
         endingZone.spiderDead = true;
         hint = GameObject.Find("Canvas2").transform.GetChild(6).gameObject;
+    }
+
+    private void Update()
+    {
+        if(active && Input.GetKeyDown(KeyCode.E))
+        {
+            SceneManager.LoadScene("Credits");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,14 +40,6 @@ public class SpiderDeadBody : MonoBehaviour
         {
             hint.gameObject.SetActive(false);
             active = false; ;
-        }
-    }
-
-    private void Update()
-    {
-        if(active && Input.GetKeyDown(KeyCode.E))
-        {
-            SceneManager.LoadScene("Credits");
         }
     }
 }

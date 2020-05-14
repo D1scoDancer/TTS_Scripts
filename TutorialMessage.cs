@@ -1,6 +1,9 @@
 ﻿using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Класс отображающий игровые подсказки
+/// </summary>
 public class TutorialMessage : MonoBehaviour
 {
     public TextMeshProUGUI hint;

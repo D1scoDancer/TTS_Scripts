@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
-using System;
 
-
+/// <summary>
+/// Класс отвечающий за уничтожение игрового объекта
+/// </summary>
 public class AutoDestroy : MonoBehaviour
 {
     DateTime t;

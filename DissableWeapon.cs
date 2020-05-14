@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Класс отключающий возможность стрелять у игрока
+/// </summary>
 public class DissableWeapon : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.name == "Player")
         {

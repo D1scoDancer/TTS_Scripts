@@ -3,11 +3,31 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
+/// <summary>
+/// Класс сериализующий прогресс игры в бинарный файл, а также десериализующий его же
+/// </summary>
 public class SaveManager : MonoBehaviour
 {
     [HideInInspector]
     public SaveInformation saveInfo;
 
+    private void Awake()
+    {
+        if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
+        {
+            ReadInfoFromFile();
+        }
+        else
+        {
+            Transform player = FindObjectOfType<Player>().transform;
+            saveInfo.playerPosition = new float[3] { player.position.x, player.position.y, player.position.z };
+            SaveInfoToFile();
+        }
+    }
+
+    /// <summary>
+    /// Сохранить информацию в файл
+    /// </summary>
     public void SaveInfoToFile()
     {
         try
@@ -30,7 +50,9 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Прочитать информацию из файла
+    /// </summary>
     public void ReadInfoFromFile()
     {
         try
@@ -50,6 +72,10 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Перезаписать текущий объект сохранения новым
+    /// </summary>
+    /// <param name="file"></param>
     private void Rewrite(SaveInformation file)
     {
         saveInfo.SpiderHealth = file.SpiderHealth;
@@ -58,20 +84,4 @@ public class SaveManager : MonoBehaviour
         saveInfo.dialogNumber = file.dialogNumber;
         saveInfo.screens = file.screens;
     }
-
-    private void Awake()
-    {
-        if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
-        {
-            ReadInfoFromFile();
-        }
-        else
-        {
-            Transform player = FindObjectOfType<Player>().transform;
-            saveInfo.playerPosition = new float[3] { player.position.x, player.position.y, player.position.z };
-            SaveInfoToFile();
-        }
-    }
 }
-
-

@@ -3,6 +3,9 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Класс описывающий сущность игрока
+/// </summary>
 public class Player : MonoBehaviour, IKillable
 {
     public GameObject deathEffect;
@@ -19,7 +22,6 @@ public class Player : MonoBehaviour, IKillable
     private Weapon weapon;
 
     private SaveManager saveManager;
-
 
     private void Start()
     {
@@ -38,6 +40,26 @@ public class Player : MonoBehaviour, IKillable
         }
     }
 
+    private void Update()
+    {
+        if(hit)
+        {
+            FlashingRed();
+        }
+        ResetValues();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.layer == 4)
+        {
+            Die();
+        }
+    }
+
+    /// <summary>
+    /// Умереть
+    /// </summary>
     public void Die()
     {
         health = 0;
@@ -47,6 +69,10 @@ public class Player : MonoBehaviour, IKillable
         StartCoroutine("Respawn");
     }
 
+    /// <summary>
+    /// Возродиться
+    /// </summary>
+    /// <returns>время ожидания</returns>
     public IEnumerator Respawn()
     {
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
@@ -65,6 +91,9 @@ public class Player : MonoBehaviour, IKillable
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    /// <summary>
+    /// Отключить компоненты
+    /// </summary>
     public void DisableComponents()
     {
         spriteRenderer.enabled = false;
@@ -77,15 +106,10 @@ public class Player : MonoBehaviour, IKillable
         weapon.enabled = false;
     }
 
-    private void Update()
-    {
-        if(hit)
-        {
-            FlashingRed();
-        }
-        ResetValues();
-    }
-
+    /// <summary>
+    /// Получить урон
+    /// </summary>
+    /// <param name="damage">урон</param>
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -96,12 +120,19 @@ public class Player : MonoBehaviour, IKillable
         hit = true;
     }
 
+    /// <summary>
+    /// Менять цвет на красный при получении урона
+    /// </summary>
     private void FlashingRed()
     {
         GetComponent<SpriteRenderer>().color = Color.red;
         StartCoroutine(WhiteColor());
     }
 
+    /// <summary>
+    /// Вернуть обычный цвет
+    /// </summary>
+    /// <returns>задержка</returns>
     IEnumerator WhiteColor()
     {
         yield return new WaitForSeconds(0.5f);
@@ -109,16 +140,11 @@ public class Player : MonoBehaviour, IKillable
         hit = false;
     }
 
+    /// <summary>
+    /// Сбросить значения переменных
+    /// </summary>
     private void ResetValues()
     {
         hit = false;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.layer == 4)
-        {
-            Die();
-        }
     }
 }

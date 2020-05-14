@@ -2,6 +2,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Класс хранящий данные о прогрессе игры
+/// </summary>
 public class SavePoint : MonoBehaviour
 {
     public TextMeshProUGUI hint;
@@ -14,15 +17,12 @@ public class SavePoint : MonoBehaviour
 
     public int orderNumber;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         saveManager = FindObjectOfType<SaveManager>();
         activatedFirst = saveManager.saveInfo.screens[orderNumber - 1];
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(isAllowedToSave && Input.GetKeyDown(KeyCode.E))

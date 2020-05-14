@@ -1,6 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
+/// <summary>
+/// Класс для сохранения игрового прогресса
+/// </summary>
 [Serializable]
 public class SaveInformation
 {
