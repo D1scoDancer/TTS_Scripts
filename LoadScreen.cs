@@ -9,7 +9,7 @@ public class LoadScreen : MonoBehaviour
 {
     public float time;
 
-    private void Start()
+    void Start()
     {
         StartCoroutine(Wait());
     }
@@ -18,7 +18,7 @@ public class LoadScreen : MonoBehaviour
     /// Ожидание перед загрузкой игры
     /// </summary>
     /// <returns></returns>
-    private IEnumerator Wait()
+    IEnumerator Wait()
     {
         yield return new WaitForSeconds(time);
         SceneManager.LoadScene("Level-01-Cave");

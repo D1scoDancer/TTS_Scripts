@@ -11,19 +11,19 @@ public class Player : MonoBehaviour, IKillable
     public GameObject deathEffect;
 
     public int health;
-    private bool hit;
+    bool hit;
 
-    private SpriteRenderer spriteRenderer;
-    private PlayerController playerController;
-    private Rigidbody2D rigidbody2D;
-    private BoxCollider2D collider2D;
-    private Animator animator;
-    private BetterJump betterJump;
-    private Weapon weapon;
+    SpriteRenderer spriteRenderer;
+    PlayerController playerController;
+    Rigidbody2D rigidbody2D;
+    BoxCollider2D collider2D;
+    Animator animator;
+    BetterJump betterJump;
+    Weapon weapon;
 
-    private SaveManager saveManager;
+    SaveManager saveManager;
 
-    private void Start()
+    void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerController = GetComponent<PlayerController>();
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour, IKillable
         }
     }
 
-    private void Update()
+    void Update()
     {
         if(hit)
         {
@@ -49,7 +49,7 @@ public class Player : MonoBehaviour, IKillable
         ResetValues();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.layer == 4)
         {
@@ -123,7 +123,7 @@ public class Player : MonoBehaviour, IKillable
     /// <summary>
     /// Менять цвет на красный при получении урона
     /// </summary>
-    private void FlashingRed()
+    void FlashingRed()
     {
         GetComponent<SpriteRenderer>().color = Color.red;
         StartCoroutine(WhiteColor());
@@ -143,7 +143,7 @@ public class Player : MonoBehaviour, IKillable
     /// <summary>
     /// Сбросить значения переменных
     /// </summary>
-    private void ResetValues()
+    void ResetValues()
     {
         hit = false;
     }

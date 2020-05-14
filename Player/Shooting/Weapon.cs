@@ -9,38 +9,38 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
 
-    private SpriteRenderer spriteRenderer;
+    SpriteRenderer spriteRenderer;
 
-    private void Start()
+    void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void Update()
+    void Update()
     {
         if(Input.GetMouseButtonDown(0) && spriteRenderer.color.b > 0.5)
         {
             FindObjectOfType<AudioManager>().Play("Shoot");
             Shoot();
-        } 
+        }
     }
 
     /// <summary>
     /// Возврат обычного цвета
     /// </summary>
     /// <returns></returns>
-    private IEnumerator ReturnColor()
+    IEnumerator ReturnColor()
     {
         yield return new WaitForSeconds(1.5f);
-        spriteRenderer.color = new Color(255, 255, spriteRenderer.color.b +0.1f, 255);
+        spriteRenderer.color = new Color(255, 255, spriteRenderer.color.b + 0.1f, 255);
     }
 
     /// <summary>
     /// Логика стрельбы
     /// </summary>
-    private void Shoot()
+    void Shoot()
     {
-        spriteRenderer.color = new Color(255, 255, spriteRenderer.color.b-0.1f, 255);
+        spriteRenderer.color = new Color(255, 255, spriteRenderer.color.b - 0.1f, 255);
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         StartCoroutine("ReturnColor");
     }

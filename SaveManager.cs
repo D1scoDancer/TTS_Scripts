@@ -11,7 +11,7 @@ public class SaveManager : MonoBehaviour
     [HideInInspector]
     public SaveInformation saveInfo;
 
-    private void Awake()
+    void Awake()
     {
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
         {
@@ -41,7 +41,7 @@ public class SaveManager : MonoBehaviour
                 formatter.Serialize(fs, saveInfo);
             }
 
-            Debug.Log(saveInfo.ToString()); 
+            Debug.Log(saveInfo.ToString());
         }
         catch(Exception e)
         {
@@ -76,7 +76,7 @@ public class SaveManager : MonoBehaviour
     /// Перезаписать текущий объект сохранения новым
     /// </summary>
     /// <param name="file"></param>
-    private void Rewrite(SaveInformation file)
+    void Rewrite(SaveInformation file)
     {
         saveInfo.SpiderHealth = file.SpiderHealth;
         saveInfo.playerPosition = file.playerPosition;

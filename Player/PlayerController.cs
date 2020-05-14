@@ -6,39 +6,39 @@ using UnityEngine;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D myRigidbody2D;
-    private Animator myAnimator;
+    Rigidbody2D myRigidbody2D;
+    Animator myAnimator;
     public Transform cameraCM;
 
     [SerializeField]
-    private LayerMask whatIsGround;
+    LayerMask whatIsGround;
 
     [SerializeField]
-    private Transform[] groundPoints;
+    Transform[] groundPoints;
 
     [SerializeField]
-    private float speed = 0; // скорость движения по x
+    float speed = 0; // скорость движения по x
     [SerializeField]
-    private float groundRadius;
+    float groundRadius;
     [SerializeField]
-    private float jumpForce;
+    float jumpForce;
 
     // настройки камеры
-    private float cmYStandart;
+    float cmYStandart;
     [SerializeField]
-    private float cmYDown;
+    float cmYDown;
     [SerializeField]
-    private float cmSpeed;
-    private bool cameraDown;
+    float cmSpeed;
+    bool cameraDown;
 
-    private bool facingRight;
-    private bool isGrounded;
-    private bool jump;
-    private bool climb;
+    bool facingRight;
+    bool isGrounded;
+    bool jump;
+    bool climb;
     [SerializeField]
-    private bool airControl;
+    bool airControl;
 
-    private void Start()
+    void Start()
     {
         cmYStandart = cameraCM.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenY;
         facingRight = true;
@@ -46,12 +46,12 @@ public class PlayerController : MonoBehaviour
         myAnimator = GetComponent<Animator>();
     }
 
-    private void Update()
+    void Update()
     {
         HandleInput();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         float horizontal = Input.GetAxis("Horizontal");
         isGrounded = IsGrounded();
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
         ResetValues();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.name.Contains("Platform"))
         {
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    void OnCollisionExit2D(Collision2D collision)
     {
         if(collision.gameObject.name.Contains("MovingPlatform"))
         {
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
     /// Движение
     /// </summary>
     /// <param name="horizontal"></param>
-    private void HandleMovement(float horizontal)
+    void HandleMovement(float horizontal)
     {
         if(myRigidbody2D.velocity.y < 0)
         {
@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Обработка взодныз данных
     /// </summary>
-    private void HandleInput()
+    void HandleInput()
     {
         if(Input.GetKey(KeyCode.Space))
         {
@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Работа с камерой
     /// </summary>
-    private void HandleCamera()
+    void HandleCamera()
     {
         var setting = cameraCM.GetComponent<CinemachineVirtualCamera>();
         var body = setting.GetCinemachineComponent<CinemachineFramingTransposer>();
@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
     /// Поворот персонажа
     /// </summary>
     /// <param name="horizontal"></param>
-    private void Flip(float horizontal)
+    void Flip(float horizontal)
     {
         if(horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
         {
@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Смена слоев анимации
     /// </summary>
-    private void HandleLayers()
+    void HandleLayers()
     {
         if(!isGrounded)
         {
@@ -206,7 +206,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Сброс значений
     /// </summary>
-    private void ResetValues()
+    void ResetValues()
     {
         jump = false;
         cameraDown = false;
