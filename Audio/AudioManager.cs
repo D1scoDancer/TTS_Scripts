@@ -1,12 +1,13 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Audio;
 /// <summary>
 /// Класс отвечающий за воспроизведение всех звуков игры
 /// </summary>
 public class AudioManager : MonoBehaviour
 {
     /// <summary>
-    /// Масссив всех мелодий игры
+    /// Массив всех мелодий игры
     /// </summary>
     public Sound[] sounds;
 
@@ -19,6 +20,8 @@ public class AudioManager : MonoBehaviour
     /// Объект сохраняемой информации
     /// </summary>
     SaveManager saveManager;
+
+    public AudioMixerGroup group;
 
     void Awake()
     {
@@ -42,11 +45,13 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+            s.source.outputAudioMixerGroup = group;
         }
     }
 
     void Start()
     {
+        Debug.Log("start");
         saveManager = FindObjectOfType<SaveManager>();
 
         if(saveManager.saveInfo.dialogNumber == 0)

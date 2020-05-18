@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 /// <summary>
 /// Класс отвечающий за работу меню настроек
@@ -13,6 +14,8 @@ public class SettingsMenu : MonoBehaviour
     Resolution[] resolutions;
 
     public TMP_Dropdown resolutionDropdown;
+
+    public Slider slider;
 
     void Start()
     {
@@ -37,6 +40,10 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+
+        float temp = slider.value;
+        audioMixer.GetFloat("volume", out temp);
+        slider.value = temp;
     }
 
     /// <summary>
