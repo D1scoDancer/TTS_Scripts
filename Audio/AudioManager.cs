@@ -51,7 +51,6 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("start");
         saveManager = FindObjectOfType<SaveManager>();
 
         if(saveManager.saveInfo.dialogNumber == 0)
