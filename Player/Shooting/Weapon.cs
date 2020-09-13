@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Класс, позволяющий игроку стрелять
+/// Class that allows the player to shoot
 /// </summary>
 public class Weapon : MonoBehaviour
 {
@@ -26,7 +26,7 @@ public class Weapon : MonoBehaviour
     }
 
     /// <summary>
-    /// Возврат обычного цвета
+    /// Return to normal color
     /// </summary>
     /// <returns></returns>
     IEnumerator ReturnColor()
@@ -36,7 +36,7 @@ public class Weapon : MonoBehaviour
     }
 
     /// <summary>
-    /// Логика стрельбы
+    /// Shooting logic
     /// </summary>
     void Shoot()
     {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Класс представляющий одну из ловушек "Тунель смерти"
+/// Class representing one of the "Death Tunnel" traps
 /// </summary>
 public class DeathTunnel : MonoBehaviour
 {

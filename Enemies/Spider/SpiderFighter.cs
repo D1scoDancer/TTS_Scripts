@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Класс описывающий боевку паука
+/// Class describing spider's combat
 /// </summary>
 public class SpiderFighter : MonoBehaviour
 {
@@ -11,14 +11,14 @@ public class SpiderFighter : MonoBehaviour
     SpiderController spiderController;
 
     [SerializeField]
-    Player player;  // чтобы отслеживать положение противника
+    Player player;  // to track the position of the enemy
 
     public bool facingRight;
     public float speed;
     public int collideDamage;
     float distance;
 
-    // стрельба
+    // shooting
     public Transform firePoint;
     public Transform firePointExtra1;
     public Transform firePointExtra2;
@@ -63,7 +63,7 @@ public class SpiderFighter : MonoBehaviour
     }
 
     /// <summary>
-    /// Смотреть в сторону игрока
+    /// Look towards the player
     /// </summary>
     void LookAtPlayer()
     {
@@ -78,7 +78,7 @@ public class SpiderFighter : MonoBehaviour
     }
 
     /// <summary>
-    /// Развернуться
+    /// Turn around
     /// </summary>
     public void Flip()
     {
@@ -87,7 +87,7 @@ public class SpiderFighter : MonoBehaviour
     }
 
     /// <summary>
-    /// Выстрелить способом 1
+    /// Shoot method 1
     /// </summary>
     void Shoot1()
     {
@@ -99,7 +99,7 @@ public class SpiderFighter : MonoBehaviour
     }
 
     /// <summary>
-    /// Выстрелить способом 2
+    /// Shoot method 2
     /// </summary>
     void Shoot2()
     {
@@ -113,7 +113,7 @@ public class SpiderFighter : MonoBehaviour
     }
 
     /// <summary>
-    /// Проверка можно ли стрелять (зависит от времени)
+    /// Check if you can shoot (depends on the time)
     /// </summary>
     /// <returns></returns>
     bool CheckIfTimeToFire()
@@ -130,7 +130,7 @@ public class SpiderFighter : MonoBehaviour
     }
 
     /// <summary>
-    /// Начать бой
+    /// Start fight
     /// </summary>
     void Fight()
     {
@@ -145,7 +145,7 @@ public class SpiderFighter : MonoBehaviour
     }
 
     /// <summary>
-    /// Сбросить значения переменных
+    /// Reset variable values
     /// </summary>
     void ResetValues()
     {

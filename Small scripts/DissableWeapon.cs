@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Класс отключающий возможность стрелять у игрока
+/// Class that disables the player's ability to shoot
 /// </summary>
 public class DissableWeapon : MonoBehaviour
 {

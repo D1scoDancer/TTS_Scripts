@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Класс реализующий концовку игры
+/// Class that implements the ending of the game
 /// </summary>
 public class EndingZone : MonoBehaviour
 {
@@ -39,7 +39,7 @@ public class EndingZone : MonoBehaviour
     }
 
     /// <summary>
-    /// Начать с задержкой финальный монолог
+    /// Start with a delay the final monologue
     /// </summary>
     /// <returns></returns>
     IEnumerator EndTheGame()
@@ -49,7 +49,7 @@ public class EndingZone : MonoBehaviour
     }
 
     /// <summary>
-    /// Финальынй монолог
+    /// Final monologue
     /// </summary>
     public void StartDialogue()
     {

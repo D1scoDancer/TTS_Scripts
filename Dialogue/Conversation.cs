@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Класс описывающий диалог между 2мя персонажами. Объект для хранения информации
+/// Class describing the dialogue between 2 characters. Object for storing information
 /// </summary>
 [CreateAssetMenu(fileName = "New Conversation", menuName = "Conversation")]
 public class Conversation : ScriptableObject
@@ -13,7 +13,7 @@ public class Conversation : ScriptableObject
 }
 
 /// <summary>
-/// Структура описывающая реплики персонажа
+/// Structure describing the character's lines
 /// </summary>
 [Serializable]
 public struct Line

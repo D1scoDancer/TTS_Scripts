@@ -3,12 +3,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Класс отвечающий за работу главноего меню игры
+/// The class responsible for the operation of the main menu of the game
 /// </summary>
 public class MainMenu : MonoBehaviour
 {
     /// <summary>
-    /// Кнопка продолжить игру
+    /// Continue game button
     /// </summary>
     public void Continue()
     {
@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// Кнопка начать новую игру
+    /// Start a new game button
     /// </summary>
     public void NewGame()
     {
@@ -32,13 +32,13 @@ public class MainMenu : MonoBehaviour
         }
         catch
         {
-            Debug.Log("exeption on deleting save file");
+            Debug.Log("exception on deleting save file");
         }
         SceneManager.LoadScene("LoadScreen 0");
     }
 
     /// <summary>
-    /// Кнопка выйти из игры
+    /// Quit game button
     /// </summary>
     public void QuitGame()
     {

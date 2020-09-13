@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Класс отвечающий за начало диалога
+/// Class responsible for starting a dialog
 /// </summary>
 public class DialogueActivator : MonoBehaviour
 {
@@ -35,7 +35,7 @@ public class DialogueActivator : MonoBehaviour
     }
 
     /// <summary>
-    /// Начать диалог
+    /// Start a dialogue
     /// </summary>
     public void StartDialogue()
     {
@@ -44,7 +44,7 @@ public class DialogueActivator : MonoBehaviour
     }
 
     /// <summary>
-    /// Начать бой (по окончании диалога)
+    /// Start battle (after dialogue ends)
     /// </summary>
     public void StartFight()
     {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Класс для более плавного прыжка
+/// Class for a smoother jump
 /// </summary>
 public class BetterJump : MonoBehaviour
 {

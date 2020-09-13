@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 /// <summary>
-/// Класс сериализующий прогресс игры в бинарный файл, а также десериализующий его же
+/// Class that serializes the progress of the game into a binary file, as well as deserializes it
 /// </summary>
 public class SaveManager : MonoBehaviour
 {
@@ -26,7 +26,7 @@ public class SaveManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Сохранить информацию в файл
+    /// Save the information into the file
     /// </summary>
     public void SaveInfoToFile()
     {
@@ -51,7 +51,7 @@ public class SaveManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Прочитать информацию из файла
+    /// Read the information from the file
     /// </summary>
     public void ReadInfoFromFile()
     {
@@ -73,7 +73,7 @@ public class SaveManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Перезаписать текущий объект сохранения новым
+    /// Overwrite the current save with a new one
     /// </summary>
     /// <param name="file"></param>
     void Rewrite(SaveInformation file)

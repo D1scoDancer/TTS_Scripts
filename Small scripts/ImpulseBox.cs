@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Класс представляющий платформу придающую вектор силы к игроку
+/// Class representing the platform giving the vector of force to the player
 /// </summary>
 public class ImpulseBox : MonoBehaviour
 {

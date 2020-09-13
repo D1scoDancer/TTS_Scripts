@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Класс описывающий сюжет. Объект для хранения данных
+/// Class describing the plot. Object for storing data
 /// </summary>
 [CreateAssetMenu(fileName = "New Plot", menuName = "Plot")]
 public class Plot : ScriptableObject

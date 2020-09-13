@@ -2,7 +2,7 @@
 using System.IO;
 
 /// <summary>
-/// Класс описывающий врага
+/// Class describing an enemy
 /// </summary>
 public class Enemy : MonoBehaviour, IKillable
 {
@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour, IKillable
     }
 
     /// <summary>
-    /// Получить урон
+    /// Receive damage
     /// </summary>
     /// <param name="damage">урон</param>
     public void TakeDamage(int damage)
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour, IKillable
     }
 
     /// <summary>
-    /// Умереть
+    /// Die
     /// </summary>
     public void Die()
     {

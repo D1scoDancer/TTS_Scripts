@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Класс для сохранения игрового прогресса
+/// Class for saving game progress
 /// </summary>
 [Serializable]
 public class SaveInformation

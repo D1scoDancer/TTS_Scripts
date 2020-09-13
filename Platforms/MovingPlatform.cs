@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Класс представвляющий собой движущуюся платформу
+/// Class representing a moving platform
 /// </summary>
 public class MovingPlatform : MonoBehaviour
 {
@@ -64,7 +64,7 @@ public class MovingPlatform : MonoBehaviour
     }
 
     /// <summary>
-    /// Начать движение
+    /// Start moving
     /// </summary>
     void Move()
     {

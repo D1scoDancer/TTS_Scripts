@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Класс активирующий лягушек
+/// Class activating frogs
 /// </summary>
 public class FrogsActivator : MonoBehaviour
 {
@@ -25,7 +25,7 @@ public class FrogsActivator : MonoBehaviour
     }
 
     /// <summary>
-    /// Активация лягушек
+    /// Frog activation
     /// </summary>
     void ActivateFrogs()
     {

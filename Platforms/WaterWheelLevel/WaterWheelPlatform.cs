@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Класс отвечающий за работу ловушки "Колесо"
+/// The class responsible for the "Wheel" trap
 /// </summary>
 public class WaterWheelPlatform : MonoBehaviour
 {
@@ -80,7 +80,7 @@ public class WaterWheelPlatform : MonoBehaviour
     }
 
     /// <summary>
-    /// Начать движение "Колеса"
+    /// Start moving "Wheel"
     /// </summary>
     void StartWheel()
     {

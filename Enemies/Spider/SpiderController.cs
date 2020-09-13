@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Класс описывающий смену анимаций паука
+/// Class describing the change of spider animations
 /// </summary>
 public class SpiderController : MonoBehaviour
 {

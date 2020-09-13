@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Класс отвечающий за показ финальных титров
+/// The class responsible for showing the ending credits
 /// </summary>
 public class CreditsManager : MonoBehaviour
 {
@@ -16,7 +16,7 @@ public class CreditsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Ожидание до показа кнопки выхода
+    /// Waiting until the exit button is shown
     /// </summary>
     /// <returns></returns>
     IEnumerator Wait()
@@ -26,7 +26,7 @@ public class CreditsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Выход в меню
+    /// Exit to the menu
     /// </summary>
     public void GoToMenu()
     {

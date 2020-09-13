@@ -2,22 +2,22 @@
 using UnityEngine;
 using UnityEngine.Audio;
 /// <summary>
-/// Класс отвечающий за воспроизведение всех звуков игры
+/// Сlass responsible for playing all the sounds of the game
 /// </summary>
 public class AudioManager : MonoBehaviour
 {
     /// <summary>
-    /// Массив всех мелодий игры
+    /// Array of all the sounds of the game
     /// </summary>
     public Sound[] sounds;
 
     /// <summary>
-    /// Экземпляр класса AudioManager (паттерн Одиночка)
+    /// Instance of the AudioManager class (Singleton pattern)
     /// </summary>
     public static AudioManager instance;
 
     /// <summary>
-    /// Объект сохраняемой информации
+    /// Object for save information
     /// </summary>
     SaveManager saveManager;
 
@@ -70,7 +70,7 @@ public class AudioManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Воспроизвести мелодию
+    /// Play sound
     /// </summary>
     /// <param name="name">Имя мелодии</param>
     public void Play(string name)
@@ -84,7 +84,7 @@ public class AudioManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Остановить мелодию
+    /// Stop sound
     /// </summary>
     /// <param name="name">Имя мелодии</param>
     public void Stop(string name)

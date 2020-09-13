@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Класс отвечающий за работу меню паузы
+/// Class responsible for the work of the pause menu
 /// </summary>
 public class PauseMenu : MonoBehaviour
 {
@@ -26,7 +26,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// Поставить паузу
+    /// Pause the game
     /// </summary>
     void Pause()
     {
@@ -36,7 +36,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// Кнопка продолжить
+    /// Continue the game
     /// </summary>
     public void Resume()
     {
@@ -46,7 +46,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// Кнопка выйти в меню
+    /// Exit to main menu
     /// </summary>
     public void LoadMenu()
     {
@@ -55,7 +55,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// Кнопка выйти из игры
+    /// Quit the game
     /// </summary>
     public void QuitGame()
     {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Класс описывающий персонажа. Объект для хранения информации
+/// Class describing the character. Object for storing information
 /// </summary>
 [CreateAssetMenu(fileName = "New Character", menuName = "Character")]
 public class Character : ScriptableObject

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Класс отображающий игровые подсказки
+/// Class that displays game hints
 /// </summary>
 public class TutorialMessage : MonoBehaviour
 {

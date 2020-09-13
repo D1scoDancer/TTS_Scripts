@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 /// <summary>
-/// Класс описывающий поведение пули
+/// Class describing bullet behavior
 /// </summary>
 public class Bullet : MonoBehaviour
 {

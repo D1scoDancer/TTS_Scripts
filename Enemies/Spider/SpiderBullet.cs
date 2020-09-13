@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Класс описывающий пулю паука
+/// Class describing spider's bullet
 /// </summary>
 public class SpiderBullet : MonoBehaviour
 {

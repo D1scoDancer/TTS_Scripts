@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Класс хранящий данные о прогрессе игры
+/// Class that stores data of the progress of the game
 /// </summary>
 public class SavePoint : MonoBehaviour
 {

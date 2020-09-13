@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 /// <summary>
-/// Класс описывающий UI участников диалога
+/// Class describing the UI of the dialogue participants
 /// </summary>
 public class SpeakerUI : MonoBehaviour
 {
@@ -30,17 +30,17 @@ public class SpeakerUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Проверка на говорящего
+    /// Speaker check
     /// </summary>
     /// <param name="character"></param>
-    /// <returns>результат проверки</returns>
+    /// <returns>result of checking</returns>
     public bool SpeakerIs(Character character)
     {
         return speaker == character;
     }
 
     /// <summary>
-    /// Спрятать UI
+    /// Hide UI
     /// </summary>
     public void Hide()
     {
@@ -48,7 +48,7 @@ public class SpeakerUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Показать UI
+    /// Show UI
     /// </summary>
     public void Show()
     {

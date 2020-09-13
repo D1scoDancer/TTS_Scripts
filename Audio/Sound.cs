@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Класс описывающий одну мелодию
+/// Class describing one sound
 /// </summary>
 [Serializable]
 public class Sound

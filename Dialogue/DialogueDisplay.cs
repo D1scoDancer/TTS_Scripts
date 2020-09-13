@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine;
 
 /// <summary>
-/// Класс отвечающий за работу диалогов
+/// Class responsible for the work of dialogs
 /// </summary>
 public class DialogueDisplay : MonoBehaviour
 {
@@ -63,7 +63,7 @@ public class DialogueDisplay : MonoBehaviour
     }
 
     /// <summary>
-    /// Продолжать диалог (по очереди сменять говорящих)
+    /// Continue the dialogue (change speakers one by one)
     /// </summary>
     public void AdvanceConversation()
     {
@@ -88,7 +88,7 @@ public class DialogueDisplay : MonoBehaviour
     }
 
     /// <summary>
-    /// Определить говорящего
+    /// Identify the speaker
     /// </summary>
     void DisplayLine()
     {
@@ -106,11 +106,11 @@ public class DialogueDisplay : MonoBehaviour
     }
 
     /// <summary>
-    /// Отобразить UI говорящего, скрыть UI другого
+    /// Show the speaker's UI, hide the other's UI
     /// </summary>
-    /// <param name="activeSpeakerUI">говорящий</param>
-    /// <param name="inactiveSpeakerUI">слушающий</param>
-    /// <param name="text">реплика говорящего</param>
+    /// <param name="activeSpeakerUI">speaker</param>
+    /// <param name="inactiveSpeakerUI">listener</param>
+    /// <param name="text">speaker's line</param>
     void SetDialogue(SpeakerUI activeSpeakerUI, SpeakerUI inactiveSpeakerUI, string text)
     {
         inactiveSpeakerUI.Hide();
@@ -120,11 +120,11 @@ public class DialogueDisplay : MonoBehaviour
     }
 
     /// <summary>
-    /// Вывод строки по буквам с задержкой
+    /// Outputting a string letter by letter with a delay
     /// </summary>
-    /// <param name="activeSpeakerUI">говорящий</param>
-    /// <param name="text">реплика говорящего</param>
-    /// <returns>буквы с задержкой в 3 кадра</returns>
+    /// <param name="activeSpeakerUI">speaker</param>
+    /// <param name="text">speaker's line</param>
+    /// <returns>letters with a delay of 3 frames</returns>
     IEnumerator TypeSentence(SpeakerUI activeSpeakerUI, string text)
     {
         activeSpeakerUI.Dialog = "";

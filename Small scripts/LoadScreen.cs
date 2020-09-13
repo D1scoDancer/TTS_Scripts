@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Класс загружающий экран загрузки
+/// Сlass that calls the loading screen
 /// </summary>
 public class LoadScreen : MonoBehaviour
 {
@@ -15,7 +15,7 @@ public class LoadScreen : MonoBehaviour
     }
 
     /// <summary>
-    /// Ожидание перед загрузкой игры
+    /// Waiting before loading the game
     /// </summary>
     /// <returns></returns>
     IEnumerator Wait()

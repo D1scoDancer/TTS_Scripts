@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Класс представляющий функционал трупа паука
+/// Class representing the functionality of a spider corpse
 /// </summary>
 public class SpiderDeadBody : MonoBehaviour
 {

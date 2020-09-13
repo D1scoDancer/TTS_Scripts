@@ -1,5 +1,5 @@
 ﻿/// <summary>
-/// Интерфейс представляющий смертный объект
+/// Interface representing a mortal object
 /// </summary>
 public interface IKillable 
 {

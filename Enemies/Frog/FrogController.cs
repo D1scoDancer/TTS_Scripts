@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Класс описывающий поведение лягушки
+/// Class describing frog behavior
 /// </summary>
 public class FrogController : MonoBehaviour
 {

@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 
 /// <summary>
-/// Класс отвечающий за работу меню настроек
+/// Class responsible for the operation of the settings menu
 /// </summary>
 public class SettingsMenu : MonoBehaviour
 {
@@ -47,7 +47,7 @@ public class SettingsMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// Задать громкость
+    /// Set volume
     /// </summary>
     /// <param name="volume"></param>
     public void SetVolume(float volume)
@@ -56,7 +56,7 @@ public class SettingsMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// Задать качество
+    /// Set quality
     /// </summary>
     /// <param name="qualityIndex"></param>
     public void SetQuality(int qualityIndex)
@@ -65,16 +65,16 @@ public class SettingsMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// Задать полноэкранный режим
+    /// Set full-screen mode
     /// </summary>
     /// <param name="isFullScreen"></param>
     public void SetFullScreen(bool isFullScreen)
     {
         Screen.fullScreen = isFullScreen;
     }
-    
+
     /// <summary>
-    /// Задать расрешение экрана
+    /// Set screen resolution
     /// </summary>
     /// <param name="resolutionIndex"></param>
     public void SetResolution(int resolutionIndex)

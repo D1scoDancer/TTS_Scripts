@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Класс отвечающий за уничтожение игрового объекта
+/// Class responsible for the destruction of the game object
 /// </summary>
 public class AutoDestroy : MonoBehaviour
 {

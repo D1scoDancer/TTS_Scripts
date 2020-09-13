@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Класс отвечающий за начало боя при выполнении определенных условий
+/// The class responsible for starting a battle when certain conditions are met
 /// </summary>
 public class SpiderWaiter : MonoBehaviour
 {

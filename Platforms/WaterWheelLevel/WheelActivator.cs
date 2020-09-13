@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Класс отвечающий за активацию ловушки "Колесо"
+/// Class responsible for activating the "Wheel" trap
 /// </summary>
 public class WheelActivator : MonoBehaviour
 {

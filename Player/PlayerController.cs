@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Класс контролирующий передвижение игрока и смену анимаций игрока
+/// Class that controls the movement of the player and the change of player animations
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
@@ -17,13 +17,13 @@ public class PlayerController : MonoBehaviour
     Transform[] groundPoints;
 
     [SerializeField]
-    float speed = 0; // скорость движения по x
+    float speed = 0; // x travel speed
     [SerializeField]
     float groundRadius;
     [SerializeField]
     float jumpForce;
 
-    // настройки камеры
+    // camera settings
     float cmYStandart;
     [SerializeField]
     float cmYDown;
@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Движение
+    /// Movement
     /// </summary>
     /// <param name="horizontal"></param>
     void HandleMovement(float horizontal)
@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Обработка взодныз данных
+    /// Input processing
     /// </summary>
     void HandleInput()
     {
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Работа с камерой
+    /// Working with the camera
     /// </summary>
     void HandleCamera()
     {
@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Поворот персонажа
+    /// Character rotation
     /// </summary>
     /// <param name="horizontal"></param>
     void Flip(float horizontal)
@@ -162,8 +162,8 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Проверка стоит ли персонаж на земле
-    /// Сталкивются ли точки с чем то кроме персонажа
+    /// Checking if the character is on the ground
+    /// Do the points collide with something other than the character
     /// </summary>
     /// <returns></returns>
     public bool IsGrounded()
@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Смена слоев анимации
+    /// Changing animation layers
     /// </summary>
     void HandleLayers()
     {
@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Сброс значений
+    /// Reset variable values
     /// </summary>
     void ResetValues()
     {

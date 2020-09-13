@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Класс описывающий сущность игрока
+/// Class describing the entity of the player
 /// </summary>
 public class Player : MonoBehaviour, IKillable
 {
@@ -58,7 +58,7 @@ public class Player : MonoBehaviour, IKillable
     }
 
     /// <summary>
-    /// Умереть
+    /// Die
     /// </summary>
     public void Die()
     {
@@ -70,9 +70,9 @@ public class Player : MonoBehaviour, IKillable
     }
 
     /// <summary>
-    /// Возродиться
+    /// Respawn
     /// </summary>
-    /// <returns>время ожидания</returns>
+    /// <returns>waiting time</returns>
     public IEnumerator Respawn()
     {
         if(File.Exists(Application.persistentDataPath + @"\saveFile.bin"))
@@ -92,7 +92,7 @@ public class Player : MonoBehaviour, IKillable
     }
 
     /// <summary>
-    /// Отключить компоненты
+    /// Disable components
     /// </summary>
     public void DisableComponents()
     {
@@ -107,7 +107,7 @@ public class Player : MonoBehaviour, IKillable
     }
 
     /// <summary>
-    /// Получить урон
+    /// Recieve damage
     /// </summary>
     /// <param name="damage">урон</param>
     public void TakeDamage(int damage)
@@ -121,7 +121,7 @@ public class Player : MonoBehaviour, IKillable
     }
 
     /// <summary>
-    /// Менять цвет на красный при получении урона
+    /// Change color to red when taking damage
     /// </summary>
     void FlashingRed()
     {
@@ -130,7 +130,7 @@ public class Player : MonoBehaviour, IKillable
     }
 
     /// <summary>
-    /// Вернуть обычный цвет
+    /// Return to normal color
     /// </summary>
     /// <returns>задержка</returns>
     IEnumerator WhiteColor()
@@ -141,7 +141,7 @@ public class Player : MonoBehaviour, IKillable
     }
 
     /// <summary>
-    /// Сбросить значения переменных
+    /// Reset variable values
     /// </summary>
     void ResetValues()
     {
